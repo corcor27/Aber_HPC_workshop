@@ -134,6 +134,9 @@ While XAI helps catch spurious correlations, it introduces its own set of clinic
 - Visual Reassurance vs. Ground Truth: Heatmaps show where the model was "looking," but they do not prove logical reasoning. A saliency map highlighting a lung region does not guarantee the model evaluated the correct tissue structure.
 - Automation Bias: If a highlighted region vaguely overlaps with an abnormality, clinicians may prematurely trust a flawed AI output, overriding their own clinical judgment.
 
+!["Are we dealing with supervised or unsupervised
+learning?"](fig/explainability.jpeg){alt="Flow Diagram for determining supvervised vs unsupervised"}.
+
 ## Challenge C: Data Privacy & Sovereign Borders
 
 Tech giants scale their businesses by collecting massive consumer data pools into centralized clouds. In medicine, strict privacy frameworks like HIPAA (Health Insurance Portability and Accountability Act) and GDPR (General Data Protection Regulation) make this central gathering approach an operational and legal impossibility.
