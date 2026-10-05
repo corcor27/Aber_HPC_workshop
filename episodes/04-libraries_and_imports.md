@@ -111,28 +111,28 @@ learning?"](fig/skin_cancer.png){alt="Flow Diagram for determining supvervised v
 
 ## Challenge B: The Black Box & Explainability (XAI)
 
-Deep learning models operate by routing inputs through millions of abstract mathematical connections. This yields a Black Box problem: an input goes in, an output comes out, but the exact clinical logic remains completely invisible.
+When a doctor prescribes a medication or orders a surgical intervention, they can articulate their clinical reasoning. They evaluate symptoms, lab values, and underlying physiological mechanisms. Deep learning models, however, operate on thousands of abstract statistical features across millions of parameters. They deliver high-accuracy outputs without revealing how they arrived at a conclusion—a problem commonly known as the "Black Box."
 
-**Moving Past the Black Box with SHAP & LIME**
+In clinical care, an unexplainable prediction—no matter how statistically accurate on paper—creates critical safety hazards, obscures algorithmic failure modes, and makes true informed consent nearly impossible.
+The Shortcuts of Deep Learning
 
-Physicians have an ethical and legal duty of care. You cannot prescribe a aggressive treatment protocol or send a patient to emergency surgery simply because a model generated a high risk score. You need to know why.
-Medicine solves this using Explainable AI (XAI) frameworks. The two industry standards are:
+Deep neural networks excel at optimizing for a target objective, but they do not understand clinical causality. Without explainability tools, a model can achieve near-perfect diagnostic metrics by exploiting unintended artifacts, background noise, or metadata in the image rather than learning genuine pathology.
 
-- SHAP (SHapley Additive exPlanations): Uses cooperative game theory to calculate the exact structural contribution of each medical feature to the final prediction.
-- LIME (Local Interpretable Model-agnostic Explanations): Purposely perturbs the data around a single patient to see which variables cause the prediction to flip.
+Spurious Correlations in Radiological Imaging
 
-**Reading a SHAP Force Plot**
+Consider a convolutional neural network trained to detect pneumothorax (collapsed lung) on chest X-rays:
 
-When integrated into an Electronic Health Record (EHR), an XAI tool transforms a blind risk percentage into an actionable diagnostic map.
+- The Artifact Trap: Patients with acute pneumothorax in hospitals frequently receive immediate treatment via a chest tube insertion. In training datasets, chest X-rays of patients with pneumothorax often contain visible chest drain tubes or specific alignment markers used in emergency triage rooms.
+- The Clinical Consequence: Rather than learning the subtle visceral pleural edge or lung tissue density changes, the model learns to identify the plastic tube or triage tag. When evaluated on standard test metrics, its performance appears exceptional. However, when deployed on a early-stage patient without a chest tube, the model fails to detect the condition—mistaking a treatment marker for the disease itself.
 
-!["Are we dealing with supervised or unsupervised
-learning?"](fig/EHR_example.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
+### Saliency Maps & Explainable AI (XAI) Methods
 
-As shown in the force plot visualization above, the model reveals its internal decision-making path for individual patients:
+To open the black box, researchers and clinicians utilize Explainable AI (XAI) techniques, such as Grad-CAM (Gradient-weighted Class Activation Mapping), Integrated Gradients, and SHAP (SHapley Additive exPlanations). These frameworks highlight which regions of an input image or feature vector contributed most heavily to the model's output.
 
-- The Baseline Value: The system starts at a standard population risk baseline.
-- The Dynamic Vectors: Clinical variables act as directional forces. Red bars push the patient's score higher toward a critical alert threshold, while blue bars pull the prediction down toward safety.
-- Clinical Verification: A clinician can quickly review the chart and see that a high risk score was driven specifically by a high respiratory rate (RR = 23.0) paired with a compromised oxygenation status (PaO2 = 53.0), allowing them to clinically validate the AI's warning.
+While XAI helps catch spurious correlations, it introduces its own set of clinical challenges:
+
+- Visual Reassurance vs. Ground Truth: Heatmaps show where the model was "looking," but they do not prove logical reasoning. A saliency map highlighting a lung region does not guarantee the model evaluated the correct tissue structure.
+- Automation Bias: If a highlighted region vaguely overlaps with an abnormality, clinicians may prematurely trust a flawed AI output, overriding their own clinical judgment.
 
 ## Challenge C: Data Privacy & Sovereign Borders
 
