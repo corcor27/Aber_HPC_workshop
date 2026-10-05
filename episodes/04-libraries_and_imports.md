@@ -118,7 +118,7 @@ The Shortcuts of Deep Learning
 
 Deep neural networks excel at optimizing for a target objective, but they do not understand clinical causality. Without explainability tools, a model can achieve near-perfect diagnostic metrics by exploiting unintended artifacts, background noise, or metadata in the image rather than learning genuine pathology.
 
-Spurious Correlations in Radiological Imaging
+### Spurious Correlations in Radiological Imaging
 
 Consider a convolutional neural network trained to detect pneumothorax (collapsed lung) on chest X-rays:
 
