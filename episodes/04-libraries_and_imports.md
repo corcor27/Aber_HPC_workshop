@@ -169,7 +169,9 @@ Rather than forcing the LLM to generate responses entirely from its original tra
 - Context Embedding: The system extracts the most accurate document snippets and injects them directly into the LLM's prompt window alongside the original user question.
 - Grounded Generation: The LLM reads the provided reference materials and uses them as an open-book source to draft its answer. It is explicitly instructed to only use the provided text.
 - Source Citation: The final output is generated with direct citations linking back to the source documents, allowing human experts to cross-reference and verify the model's claims instantly.
-    
+
+!["Are we dealing with supervised or unsupervised
+learning?"](fig/Hallucinations_Fabricated_Evidence.jpeg){alt="Flow Diagram for determining supvervised vs unsupervised"}.
     
 ## Summary Wrap-Up for the Session
 Key Takeaway: Ethical healthcare AI requires moving past the simple metric of "accuracy." We must actively inspect our datasets for demographic gaps, use XAI tools like SHAP force plots to keep clinical logic transparent, and utilize decentralized frameworks like federated learning to respect sovereign data walls.
