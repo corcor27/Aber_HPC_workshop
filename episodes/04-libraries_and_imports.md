@@ -113,7 +113,6 @@ learning?"](fig/skin_cancer.png){alt="Flow Diagram for determining supvervised v
 
 Deep learning models operate by routing inputs through millions of abstract mathematical connections. This yields a Black Box problem: an input goes in, an output comes out, but the exact clinical logic remains completely invisible.
 
-
 **Moving Past the Black Box with SHAP & LIME**
 
 Physicians have an ethical and legal duty of care. You cannot prescribe a aggressive treatment protocol or send a patient to emergency surgery simply because a model generated a high risk score. You need to know why.
