@@ -42,10 +42,10 @@ When bad data enters an algorithm, the AI doesn't break down with an error messa
 
 Below are examples of what can be considered "bad" or problematic data:
 
-- Significant Biases and Underrepresented Minority Groups: Machine learning models mirror the data they are fed, meaning they inherently absorb any biases present in the dataset. If a specific class or group is underrepresented, the model may fail to predict it entirely, or it might default to predicting only the majority class. Think of a model like a river: if the river forks, the water naturally follows the path of least resistance. Similarly, a model will take the easiest path to minimize error, requiring deliberate intervention and adjustment to ensure it performs fairly and accurately.
-- Poor Quality Images: While clinical data often avoids this issue due to strict standardization protocols, it can still occur. If a model is trained on highly blurry images where the target object is barely visible, it will struggle to generalize. You cannot expect a model trained on degraded data to function correctly when tested on clean, high-resolution images.
-- Missing Values: Missing data poses a significant challenge because the reason for the absence matters. A blank space could represent crucial context (e.g., a intentional omission), or it could simply mean a piece of equipment failed to record the data. Treating these two scenarios the same can lead to severe consequences during training. Furthermore, missing fields are sometimes improperly filled with zeros. Because a value of zero carries its own specific meaning, any data imputation must be handled with the correct context-aware methodology.
-- Incorrect Data: While similar to missing values, incorrect data presents a distinct hazard—especially when it goes undetected. If a model unknowingly trains on corrupted or inaccurate data, it learns incorrect relationships and patterns, fundamentally undermining its real-world performance.
+- **Significant Biases and Underrepresented Minority Groups**: Machine learning models mirror the data they are fed, meaning they inherently absorb any biases present in the dataset. If a specific class or group is underrepresented, the model may fail to predict it entirely, or it might default to predicting only the majority class. Think of a model like a river: if the river forks, the water naturally follows the path of least resistance. Similarly, a model will take the easiest path to minimize error, requiring deliberate intervention and adjustment to ensure it performs fairly and accurately.
+- **Poor Quality Images**: While clinical data often avoids this issue due to strict standardization protocols, it can still occur. If a model is trained on highly blurry images where the target object is barely visible, it will struggle to generalize. You cannot expect a model trained on degraded data to function correctly when tested on clean, high-resolution images.
+- **Missing Values**: Missing data poses a significant challenge because the reason for the absence matters. A blank space could represent crucial context (e.g., a intentional omission), or it could simply mean a piece of equipment failed to record the data. Treating these two scenarios the same can lead to severe consequences during training. Furthermore, missing fields are sometimes improperly filled with zeros. Because a value of zero carries its own specific meaning, any data imputation must be handled with the correct context-aware methodology.
+- **Incorrect Data**: While similar to missing values, incorrect data presents a distinct hazard—especially when it goes undetected. If a model unknowingly trains on corrupted or inaccurate data, it learns incorrect relationships and patterns, fundamentally undermining its real-world performance.
 
 !["Are we dealing with supervised or unsupervised
 learning?"](fig/grabage_in.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
@@ -71,14 +71,14 @@ When we train a deep learning network on images from a single, high-tech facilit
 !["Are we dealing with supervised or unsupervised
 learning?"](fig/xray_example.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
 
-**A Real-World Diagnostic Failure Case Study**
+### A Real-World Diagnostic Failure Case Study
 
 Consider an AI model built to spot pneumonia on chest X-rays:
 
-- The Training Site (London Academic Center): The model is trained on thousands of scans from top-tier digital imaging suites. In these suites, stable, ambulatory patients stand up for clean, crisp posterior-anterior (PA) views.
-- The Shortcut: The model notices that the highest-quality scans almost always belong to stable patients, while low-quality, high-noise scans taken by portable bedside units belong to critically ill patients in the ICU. The model covertly learns to classify "portable machine noise" as an indicator of severe lung disease.
-- The Deployment Site (Rural Clinic): The model is deployed to a community clinic that relies entirely on an older, portable X-ray unit for all patients due to space constraints.
-- The Crash: Because every single image coming out of the rural clinic contains high noise and lower contrast, the model's performance breaks down completely. It continuously flags healthy patients as having severe pneumonia simply because it confuses the older machine's background noise with the markers of a critical ICU case.
+- **The Training Site (London Academic Center)**: The model is trained on thousands of scans from top-tier digital imaging suites. In these suites, stable, ambulatory patients stand up for clean, crisp posterior-anterior (PA) views.
+- **The Shortcut**: The model notices that the highest-quality scans almost always belong to stable patients, while low-quality, high-noise scans taken by portable bedside units belong to critically ill patients in the ICU. The model covertly learns to classify "portable machine noise" as an indicator of severe lung disease.
+- **The Deployment Site (Rural Clinic)**: The model is deployed to a community clinic that relies entirely on an older, portable X-ray unit for all patients due to space constraints.
+- **The Crash**: Because every single image coming out of the rural clinic contains high noise and lower contrast, the model's performance breaks down completely. It continuously flags healthy patients as having severe pneumonia simply because it confuses the older machine's background noise with the markers of a critical ICU case.
 
 :::::::::::::::::::::::::::::::::::::::: challenge
 
@@ -99,12 +99,12 @@ When we integrate machine learning into patient care, we cannot manage it like s
 
 Algorithms do not have moral compasses; they are historical mirrors. If the data used to train an AI model reflects societal or systemic gaps in healthcare access, the model will codify and supercharge those disparities under the guise of objective mathematics.
 
-**The Fitzpatrick Scale Disparity in Dermatology**
+### The Fitzpatrick Scale Disparity in Dermatology
 
 In medical computer vision, skin cancer screening tools rely heavily on image pattern recognition. A historical problem is that major open-source dermatology training repositories (like the ISIC archive) have historically consisted of images taken from individuals with lighter skin tones.
 
-- The Systemic Drop: When an algorithm trained primarily on Fitzpatrick Types 1–3 (lighter skin) is asked to evaluate a lesion on Fitzpatrick Types 5–6 (darker skin), its diagnostic accuracy drops precipitously.
-- The Clinical Consequence: The model fails to recognize the edge boundaries, color variations, or texture changes of a malignant melanoma against a darker background melanin index. This leads directly to higher false-negative rates and delayed, late-stage cancer diagnoses for minority patient groups.
+- **The Systemic Drop**: When an algorithm trained primarily on Fitzpatrick Types 1–3 (lighter skin) is asked to evaluate a lesion on Fitzpatrick Types 5–6 (darker skin), its diagnostic accuracy drops precipitously.
+- **The Clinical Consequence**: The model fails to recognize the edge boundaries, color variations, or texture changes of a malignant melanoma against a darker background melanin index. This leads directly to higher false-negative rates and delayed, late-stage cancer diagnoses for minority patient groups.
 
 !["Are we dealing with supervised or unsupervised
 learning?"](fig/skin_cancer.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
@@ -122,8 +122,8 @@ Deep neural networks excel at optimizing for a target objective, but they do not
 
 Consider a convolutional neural network trained to detect pneumothorax (collapsed lung) on chest X-rays:
 
-- The Artifact Trap: Patients with acute pneumothorax in hospitals frequently receive immediate treatment via a chest tube insertion. In training datasets, chest X-rays of patients with pneumothorax often contain visible chest drain tubes or specific alignment markers used in emergency triage rooms.
-- The Clinical Consequence: Rather than learning the subtle visceral pleural edge or lung tissue density changes, the model learns to identify the plastic tube or triage tag. When evaluated on standard test metrics, its performance appears exceptional. However, when deployed on a early-stage patient without a chest tube, the model fails to detect the condition—mistaking a treatment marker for the disease itself.
+- **The Artifact Trap**: Patients with acute pneumothorax in hospitals frequently receive immediate treatment via a chest tube insertion. In training datasets, chest X-rays of patients with pneumothorax often contain visible chest drain tubes or specific alignment markers used in emergency triage rooms.
+- **The Clinical Consequence**: Rather than learning the subtle visceral pleural edge or lung tissue density changes, the model learns to identify the plastic tube or triage tag. When evaluated on standard test metrics, its performance appears exceptional. However, when deployed on a early-stage patient without a chest tube, the model fails to detect the condition—mistaking a treatment marker for the disease itself.
 
 ### Saliency Maps & Explainable AI (XAI) Methods
 
@@ -131,8 +131,8 @@ To open the black box, researchers and clinicians utilize Explainable AI (XAI) t
 
 While XAI helps catch spurious correlations, it introduces its own set of clinical challenges:
 
-- Visual Reassurance vs. Ground Truth: Heatmaps show where the model was "looking," but they do not prove logical reasoning. A saliency map highlighting a lung region does not guarantee the model evaluated the correct tissue structure.
-- Automation Bias: If a highlighted region vaguely overlaps with an abnormality, clinicians may prematurely trust a flawed AI output, overriding their own clinical judgment.
+- **Visual Reassurance vs. Ground Truth**: Heatmaps show where the model was "looking," but they do not prove logical reasoning. A saliency map highlighting a lung region does not guarantee the model evaluated the correct tissue structure.
+- **Automation Bias**: If a highlighted region vaguely overlaps with an abnormality, clinicians may prematurely trust a flawed AI output, overriding their own clinical judgment.
 
 !["Are we dealing with supervised or unsupervised
 learning?"](fig/explainability.jpeg){alt="Flow Diagram for determining supvervised vs unsupervised"}.
@@ -144,7 +144,7 @@ Tech giants scale their businesses by collecting massive consumer data pools int
 !["Are we dealing with supervised or unsupervised
 learning?"](fig/data_privacy.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
 
-**The Solution: Federated Learning**
+### The Solution: Federated Learning**
 
 To train powerful models without moving highly confidential patient files across institutional boundaries, medical networks utilize Federated Learning architectures.
 
@@ -153,10 +153,10 @@ learning?"](fig/federated_learning.png){alt="Flow Diagram for determining supver
 
 Rather than forcing healthcare networks to pool private patient data into a vulnerable central repository, federated learning flips the pipeline completely:
 
-- Local Preservation: The raw data stays safely behind local firewall networks at individual facilities (e.g., individual hospitals, research centers, or universities).
-- Model Dissemination: A blank, unconfigured neural network model is sent out from a central federated server to each individual site.
-- Local On-Site Training: The model trains locally on each hospital's local data servers. No patient charts, names, or identifiers ever leave the building.
-- Global Aggregation: The sites send only their mathematical model adjustments (weight updates) back to the central server. The central server blends these updates into a master algorithm that benefits from the collective knowledge of multiple hospitals while maintaining absolute data confidentiality.
+- **Local Preservation**: The raw data stays safely behind local firewall networks at individual facilities (e.g., individual hospitals, research centers, or universities).
+- **Model Dissemination**: A blank, unconfigured neural network model is sent out from a central federated server to each individual site.
+- **Local On-Site Training**: The model trains locally on each hospital's local data servers. No patient charts, names, or identifiers ever leave the building.
+- **Global Aggregation**: The sites send only their mathematical model adjustments (weight updates) back to the central server. The central server blends these updates into a master algorithm that benefits from the collective knowledge of multiple hospitals while maintaining absolute data confidentiality.
 
 ## Challenge D: Hallucinations & Fabricated Evidence
 
@@ -168,10 +168,10 @@ To prevent models from relying solely on their static, imperfect internal memory
 
 Rather than forcing the LLM to generate responses entirely from its original training weights, a RAG pipeline anchors the model's generation to trusted, verifiable data sources:
 
-- External Knowledge Retrieval: When a user submits a query, the system first searches a curated, authoritative database (e.g., peer-reviewed medical journals, internal legal code, or technical manuals) for relevant documents.
-- Context Embedding: The system extracts the most accurate document snippets and injects them directly into the LLM's prompt window alongside the original user question.
-- Grounded Generation: The LLM reads the provided reference materials and uses them as an open-book source to draft its answer. It is explicitly instructed to only use the provided text.
-- Source Citation: The final output is generated with direct citations linking back to the source documents, allowing human experts to cross-reference and verify the model's claims instantly.
+- **External Knowledge Retrieval**: When a user submits a query, the system first searches a curated, authoritative database (e.g., peer-reviewed medical journals, internal legal code, or technical manuals) for relevant documents.
+- **Context Embedding**: The system extracts the most accurate document snippets and injects them directly into the LLM's prompt window alongside the original user question.
+- **Grounded Generation**: The LLM reads the provided reference materials and uses them as an open-book source to draft its answer. It is explicitly instructed to only use the provided text.
+- **Source Citation**: The final output is generated with direct citations linking back to the source documents, allowing human experts to cross-reference and verify the model's claims instantly.
 
 !["Are we dealing with supervised or unsupervised
 learning?"](fig/Hallucinations_Fabricated_Evidence.jpeg){alt="Flow Diagram for determining supvervised vs unsupervised"}.
@@ -196,9 +196,9 @@ Transitioning machine learning from theory to implementation requires selecting 
 
 Raw features must be mathematically transformed into optimized tensors to ensure gradient stability and network convergence:
 
-- Standardization: Translates data to a mean of 0 and a standard deviation of 1, preserving outlier relative positioning.
-- Min-Max Scaling: Compresses arrays into a rigid $[0, 1]$ boundary, which is essential for uniform structures like image pixel matrices.
-- Embedding Layers: Replace memory-intensive one-hot encoding by mapping high-cardinality discrete categories into dense, low-dimensional continuous vector spaces.
+- **Standardization**: Translates data to a mean of 0 and a standard deviation of 1, preserving outlier relative positioning.
+- **Min-Max Scaling**: Compresses arrays into a rigid $[0, 1]$ boundary, which is essential for uniform structures like image pixel matrices.
+- **Embedding Layers**: Replace memory-intensive one-hot encoding by mapping high-cardinality discrete categories into dense, low-dimensional continuous vector spaces.
 
 ### Execution Pipelines & Infrastructure
 
