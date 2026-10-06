@@ -42,13 +42,13 @@ When bad data enters an algorithm, the AI doesn't break down with an error messa
 
 Below are examples of what can be considered "bad" or problematic data:
 
-- **Significant Biases and Underrepresented Minority Groups**: Machine learning models mirror the data they are fed, meaning they inherently absorb any biases present in the dataset. If a specific class or group is underrepresented, the model may fail to predict it entirely, or it might default to predicting only the majority class. Think of a model like a river: if the river forks, the water naturally follows the path of least resistance. Similarly, a model will take the easiest path to minimize error, requiring deliberate intervention and adjustment to ensure it performs fairly and accurately.
-- **Poor Quality Images**: While clinical data often avoids this issue due to strict standardization protocols, it can still occur. If a model is trained on highly blurry images where the target object is barely visible, it will struggle to generalize. You cannot expect a model trained on degraded data to function correctly when tested on clean, high-resolution images.
+- **Significant Biases and Underrepresented Minority Groups**: Machine learning models mirror the data they are fed, meaning they inherently absorb any biases present in the dataset. If a specific class or group is underrepresented, the model may fail to predict it entirely, or it might default to predicting only the majority class. Think of a model like a river: if the river forks, the water naturally follows the path of least resistance. Similarly, a model will take the easiest path to minimise error, requiring deliberate intervention and adjustment to ensure it performs fairly and accurately.
+- **Poor Quality Images**: While clinical data often avoids this issue due to strict standardisation protocols, it can still occur. If a model is trained on highly blurry images where the target object is barely visible, it will struggle to generalise. You cannot expect a model trained on degraded data to function correctly when tested on clean, high-resolution images.
 - **Missing Values**: Missing data poses a significant challenge because the reason for the absence matters. A blank space could represent crucial context (e.g., a intentional omission), or it could simply mean a piece of equipment failed to record the data. Treating these two scenarios the same can lead to severe consequences during training. Furthermore, missing fields are sometimes improperly filled with zeros. Because a value of zero carries its own specific meaning, any data imputation must be handled with the correct context-aware methodology.
 - **Incorrect Data**: While similar to missing values, incorrect data presents a distinct hazard—especially when it goes undetected. If a model unknowingly trains on corrupted or inaccurate data, it learns incorrect relationships and patterns, fundamentally undermining its real-world performance.
 
 !["Are we dealing with supervised or unsupervised
-learning?"](fig/grabage_in.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
+learning?"](fig/grabage_in.png){alt="Flow Diagram for determining supervised vs unsupervised"}.
 
 :::::::::::::::::::::::::::::::::::::::: challenge
 
@@ -62,14 +62,14 @@ Since real-world medical data is almost always messy and imperfect, how should d
 
 ### Failure Mode 2: Model Brittleness & The Generalization Gap
 
-An AI model's performance can drop sharply when moving between hospital environments. This drop is known as Dataset Shift or The Generalization Gap.
+An AI model's performance can drop sharply when moving between hospital environments. This drop is known as Dataset Shift or The Generalisation Gap.
 
 **The Illusion of Performance: "Shortcut Learning"**
 
-When we train a deep learning network on images from a single, high-tech facility, the model often takes an unhelpful shortcut to maximize its accuracy score. It learns to recognize the specific signatures of that hospital's hardware, scan markers, or patient protocols rather than the actual medical pathology.
+When we train a deep learning network on images from a single, high-tech facility, the model often takes an unhelpful shortcut to maximise its accuracy score. It learns to recognise the specific signatures of that hospital's hardware, scan markers, or patient protocols rather than the actual medical pathology.
 
 !["Are we dealing with supervised or unsupervised
-learning?"](fig/xray_example.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
+learning?"](fig/xray_example.png){alt="Flow Diagram for determining supervised vs unsupervised"}.
 
 ### A Real-World Diagnostic Failure Case Study
 
@@ -84,7 +84,7 @@ Consider an AI model built to spot pneumonia on chest X-rays:
 
 ### Discussion
 
-A medical AI trained at a high-tech hospital might cheat by learning to recognize the crisp quality of the expensive scanning machines rather than the actual disease—causing it to completely fail when sent to a rural clinic with older equipment.
+A medical AI trained at a high-tech hospital might cheat by learning to recognise the crisp quality of the expensive scanning machines rather than the actual disease—causing it to completely fail when sent to a rural clinic with older equipment.
 
 How can we prevent AI from taking these lazy "shortcuts" during training, and what steps should a small clinic take to test a new AI tool before trusting it with real patients?
 
@@ -97,17 +97,45 @@ When we integrate machine learning into patient care, we cannot manage it like s
 
 ## Challenge A: The Dataset Bias Trap
 
-Algorithms do not have moral compasses; they are historical mirrors. If the data used to train an AI model reflects societal or systemic gaps in healthcare access, the model will codify and supercharge those disparities under the guise of objective mathematics.
+In clinical practice, a physician’s diagnosis is shaped by diverse clinical presentations observed across varied patient populations. AI models, conversely, learn exclusively from the historical data on which they are trained. When these datasets reflect historical disparities, demographic imbalances, or localised practice patterns, the model internalises these systemic flaws—a vulnerability known as the “Dataset Bias Trap.”
 
-### The Fitzpatrick Scale Disparity in Dermatology
+In healthcare delivery, a biased algorithm—regardless of its high performance on internal validation sets—threatens health equity, worsens health disparities for underrepresented groups, and creates hidden failure modes when deployed in new clinical settings.
 
-In medical computer vision, skin cancer screening tools rely heavily on image pattern recognition. A historical problem is that major open-source dermatology training repositories (like the ISIC archive) have historically consisted of images taken from individuals with lighter skin tones.
+### The Anatomy of Data Imbalance & Historical Bias
 
-- **The Systemic Drop**: When an algorithm trained primarily on Fitzpatrick Types 1–3 (lighter skin) is asked to evaluate a lesion on Fitzpatrick Types 5–6 (darker skin), its diagnostic accuracy drops precipitously.
-- **The Clinical Consequence**: The model fails to recognize the edge boundaries, color variations, or texture changes of a malignant melanoma against a darker background melanin index. This leads directly to higher false-negative rates and delayed, late-stage cancer diagnoses for minority patient groups.
+Machine learning models optimise purely for aggregate performance metrics. Consequently, they tend to prioritise accuracy on the dominant demographic groups represented in the training data at the expense of minority populations.
+
+Consider a deep learning model developed to screen for cutaneous melanoma using dermatological images:
+
+- **The Demographic Imbalance**: Training datasets sourced primarily from academic medical centers in Northern Europe or North America predominantly feature Fitzpatrick Skin Types I and II (fair skin). Images representing Fitzpatrick Skin Types V and VI (darker skin tones) often comprise less than 5% of the total dataset.
+- **The Clinical Consequence**: Because the algorithm has limited exposure to lesions on darker skin—where melanoma often presents differently (e.g., acral lentiginous melanoma on palms, soles, or nail beds)—it demonstrates significantly lower sensitivity for patients of colour. When deployed in diverse clinical environments, the AI routinely generates false negatives on underrepresented patient groups, leading to delayed diagnoses and adverse outcomes.
+
+### Failure Modes: Distribution Shift & Contextual Bias
+
+Beyond demographic representation, dataset bias manifests in operational and technical dimensions that compromise clinical generalisability:
+
+**Out-of-Distribution (OOD) Shift & Site-Specific Drift**
+
+An AI model trained on high-resolution imaging from a tertiary care center’s modern scanner may fail when deployed at a community clinic utilising older equipment or different acquisition protocols.
+
+- **Example**: Variations in slice thickness on CT scans, staining protocols in histopathology slides, or digital radiography exposure parameters can trigger catastrophic drops in diagnostic performance because the model misinterprets site-specific technical signatures as diagnostic features.
+
+**Historical & Health Systems Bias**
+
+Algorithms trained on electronic health record (EHR) data inherit the societal biases and structural inequalities embedded in clinical workflows.
+
+- **Example**: Algorithms designed to predict disease risk or manage high-risk care pathways frequently rely on historical healthcare spending or utilisation rates as proxies for health need. Because socioeconomically disadvantaged populations historically face systemic barriers to accessing care, their lower healthcare expenditures are misinterpreted by the model as lower health risk. As a result, the AI systematically under-allocates specialised care resources to those who need them most.
+
+### Mitigating Dataset Bias: Clinical & Technical Guardrails
+
+To prevent dataset bias from entering clinical workflows, healthcare organisations and developers employ multi-layered auditing and mitigation strategies:
+
+- **Disaggregated Performance Auditing**: Models must be evaluated using stratified performance metrics (e.g., reporting sensitivity, specificity, and positive predictive value separately across age, sex, race, ethnicity, and socioeconomic brackets) rather than relying solely on overall accuracy or Area Under the Curve (AUC).
+- **Dataset Nutrition Labels & Datasheets**: Implementing standardised documentation—such as Datasheets for Datasets—that explicitly logs demographic distributions, inclusion/exclusion criteria, data collection sites, and known limitations before model training.
+- **Domain Adaptation & Federated Learning**: Utilising domain adaptation techniques to adjust models to local clinical environments and leveraging federated learning to train algorithms across geographically diverse healthcare systems without centralising sensitive patient data.
 
 !["Are we dealing with supervised or unsupervised
-learning?"](fig/skin_cancer.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
+learning?"](fig/skin_cancer.png){alt="Flow Diagram for determining supervised vs unsupervised"}.
 
 ## Challenge B: The Black Box & Explainability (XAI)
 
@@ -116,7 +144,7 @@ When a doctor prescribes a medication or orders a surgical intervention, they ca
 In clinical care, an unexplainable prediction—no matter how statistically accurate on paper—creates critical safety hazards, obscures algorithmic failure modes, and makes true informed consent nearly impossible.
 The Shortcuts of Deep Learning
 
-Deep neural networks excel at optimizing for a target objective, but they do not understand clinical causality. Without explainability tools, a model can achieve near-perfect diagnostic metrics by exploiting unintended artifacts, background noise, or metadata in the image rather than learning genuine pathology.
+Deep neural networks excel at optimising for a target objective, but they do not understand clinical causality. Without explainability tools, a model can achieve near-perfect diagnostic metrics by exploiting unintended artifacts, background noise, or metadata in the image rather than learning genuine pathology.
 
 ### Spurious Correlations in Radiological Imaging
 
@@ -127,7 +155,7 @@ Consider a convolutional neural network trained to detect pneumothorax (collapse
 
 ### Saliency Maps & Explainable AI (XAI) Methods
 
-To open the black box, researchers and clinicians utilize Explainable AI (XAI) techniques, such as Grad-CAM (Gradient-weighted Class Activation Mapping), Integrated Gradients, and SHAP (SHapley Additive exPlanations). These frameworks highlight which regions of an input image or feature vector contributed most heavily to the model's output.
+To open the black box, researchers and clinicians utilise Explainable AI (XAI) techniques, such as Grad-CAM (Gradient-weighted Class Activation Mapping), Integrated Gradients, and SHAP (SHapley Additive exPlanations). These frameworks highlight which regions of an input image or feature vector contributed most heavily to the model's output.
 
 While XAI helps catch spurious correlations, it introduces its own set of clinical challenges:
 
@@ -146,10 +174,10 @@ learning?"](fig/data_privacy.png){alt="Flow Diagram for determining supvervised 
 
 ### The Solution: Federated Learning**
 
-To train powerful models without moving highly confidential patient files across institutional boundaries, medical networks utilize Federated Learning architectures.
+To train powerful models without moving highly confidential patient files across institutional boundaries, medical networks utilise Federated Learning architectures.
 
 !["Are we dealing with supervised or unsupervised
-learning?"](fig/federated_learning.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
+learning?"](fig/federated_learning.png){alt="Flow Diagram for determining supervised vs unsupervised"}.
 
 Rather than forcing healthcare networks to pool private patient data into a vulnerable central repository, federated learning flips the pipeline completely:
 
@@ -164,7 +192,7 @@ Large Language Models operate on probabilistic next-token prediction, meaning th
 
 ### The Solution: Retrieval-Augmented Generation (RAG)
 
-To prevent models from relying solely on their static, imperfect internal memory, systems utilize Retrieval-Augmented Generation (RAG) architectures.
+To prevent models from relying solely on their static, imperfect internal memory, systems utilise Retrieval-Augmented Generation (RAG) architectures.
 
 Rather than forcing the LLM to generate responses entirely from its original training weights, a RAG pipeline anchors the model's generation to trusted, verifiable data sources:
 
@@ -174,29 +202,29 @@ Rather than forcing the LLM to generate responses entirely from its original tra
 - **Source Citation**: The final output is generated with direct citations linking back to the source documents, allowing human experts to cross-reference and verify the model's claims instantly.
 
 !["Are we dealing with supervised or unsupervised
-learning?"](fig/Hallucinations_Fabricated_Evidence.jpeg){alt="Flow Diagram for determining supvervised vs unsupervised"}.
+learning?"](fig/Hallucinations_Fabricated_Evidence.jpeg){alt="Flow Diagram for determining supervised vs unsupervised"}.
     
 ## Summary Wrap-Up for the Session
-Key Takeaway: Ethical healthcare AI requires moving past the simple metric of "accuracy." We must actively inspect our datasets for demographic gaps, use XAI tools like SHAP force plots to keep clinical logic transparent, and utilize decentralized frameworks like federated learning to respect sovereign data walls.
+Key Takeaway: Ethical healthcare AI requires moving past the simple metric of "accuracy." We must actively inspect our datasets for demographic gaps, use XAI tools like SHAP force plots to keep clinical logic transparent, and utilise decentralised frameworks like federated learning to respect sovereign data walls.
 
 ## How to Build a Model: The Bare Minimum
 
 **Core Concept**
 
-"If you ever want to launch an AI research project or build a tool for your department, you need to understand that coding is only about 10% of the timeline. The real work is data governance, labeling, and workflow integration. Let's walk through the actual clinical blueprint."
+"If you ever want to launch an AI research project or build a tool for your department, you need to understand that coding is only about 10% of the timeline. The real work is data governance, labelling, and workflow integration. Let's walk through the actual clinical blueprint."
 
 ### The Multi-Phase Clinical AI Pipeline
 
 !["Are we dealing with supervised or unsupervised
-learning?"](fig/multi-phase.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
+learning?"](fig/multi-phase.png){alt="Flow Diagram for determining supervised vs unsupervised"}.
 
 ### Frameworks & Data Scaling
 
-Transitioning machine learning from theory to implementation requires selecting an optimal framework and engineering structured data pipelines. For deep learning, PyTorch provides an intuitive, dynamic computation graph for debugging complex networks inline, while TensorFlow/Keras optimizes production deployments. For tabular data, Scikit-learn manages classical algorithms, while XGBoost and LightGBM typically yield superior predictive accuracy. For genomic sequences or text, Hugging Face standardizes pre-trained transformer blocks.
+Transitioning machine learning from theory to implementation requires selecting an optimal framework and engineering structured data pipelines. For deep learning, PyTorch provides an intuitive, dynamic computation graph for debugging complex networks inline, while TensorFlow/Keras optimizes production deployments. For tabular data, Scikit-learn manages classical algorithms, while XGBoost and LightGBM typically yield superior predictive accuracy. For genomic sequences or text, Hugging Face standardises pre-trained transformer blocks.
 
-Raw features must be mathematically transformed into optimized tensors to ensure gradient stability and network convergence:
+Raw features must be mathematically transformed into optimised tensors to ensure gradient stability and network convergence:
 
-- **Standardization**: Translates data to a mean of 0 and a standard deviation of 1, preserving outlier relative positioning.
+- **Standardisation**: Translates data to a mean of 0 and a standard deviation of 1, preserving outlier relative positioning.
 - **Min-Max Scaling**: Compresses arrays into a rigid $[0, 1]$ boundary, which is essential for uniform structures like image pixel matrices.
 - **Embedding Layers**: Replace memory-intensive one-hot encoding by mapping high-cardinality discrete categories into dense, low-dimensional continuous vector spaces.
 
