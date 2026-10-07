@@ -28,14 +28,8 @@ Module 2.1: The 6 Pillars of a Data Management Plan
 
 Standard DMP templates from major funding bodies (e.g., UKRI, NIH, Horizon Europe) are structured around six fundamental areas:
 
-+-----------------------------------------------------------------------------------+
-|                            THE 6 PILLARS OF A ROBUST DMP                          |
-|                                                                                   |
-|  [ 1. Data Creation ]  --->  [ 2. Documentation ]  --->  [ 3. Ethics & Legal ]    |
-|                                                                     |             |
-|                                                                     v             |
-|  [ 6. Responsibilities] <--- [ 5. Preservation ]  <---  [ 4. Storage & Backup ]   |
-+-----------------------------------------------------------------------------------+
+!["Are we dealing with supervised or unsupervised
+learning?"](fig/pillar_21.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
 
 Module 2.2: Pillar Breakdown & Best Practices
 ## Pillar 1: Data Creation, Types & Formats
@@ -78,6 +72,9 @@ learning?"](fig/pillar_22.3.png){alt="Flow Diagram for determining supvervised v
   - Where active data resides during the project and how access permissions are managed.
   - Backup schedules, redunancy, and physical/digital security.
 - The 3-2-1 Backup Strategy:
+
+!["Are we dealing with supervised or unsupervised
+learning?"](fig/pillar_22.4.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
 
 Security Warning: Avoid syncing unencrypted sensitive participant data to commercial cloud services (e.g., personal Dropbox or Google Drive). Use institutionally managed, encrypted storage solution.
 

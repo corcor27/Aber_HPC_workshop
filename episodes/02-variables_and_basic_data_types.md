@@ -39,14 +39,8 @@ The result: The data is effectively dead, and months of labor are rendered unver
 
 Funding cycles usually last 1–3 years, but research data can have a lifespan of decades if properly curated.
 
-+-----------------------------------------------------------------------------------+
-|                            THE RESEARCH DATA LIFE CYCLE                           |
-|                                                                                   |
-|    [ 1. Planning ]  --->  [ 2. Collection ]  --->  [ 3. Processing/Analysis ]   |
-|           ^                                                    |                  |
-|           |                                                    v                  |
-|    [ 6. Re-use ]    <---  [ 5. Sharing/Discovery ] <--- [ 4. Preservation ]      |
-+-----------------------------------------------------------------------------------+
+!["Are we dealing with supervised or unsupervised
+learning?"](fig/pillar_12.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
 
 - Projects end; data persists. Major funding bodies (e.g., UKRI, NIH, Horizon Europe, Wellcome) treat research outputs as public goods.
 - A living DMP bridges the gap between active research work and long-term data preservation.

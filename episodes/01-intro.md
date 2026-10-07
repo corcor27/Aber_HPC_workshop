@@ -1,5 +1,5 @@
 ---
-title: Introductions
+title: Data management plans
 teaching: 30
 exercises: 0
 ---
@@ -23,25 +23,8 @@ exercises: 0
 
 ## Workshop Schedule
 
-schedule_data <- data.frame(
-  Time = c("09:00 - 09:20", "09:20 - 10:15", "10:15 - 10:30", "10:30 - 11:15", "11:15 - 11:45", "11:45 - 12:00"),
-  Duration = c("20 min", "55 min", "15 min", "45 min", "30 min", "15 min"),
-  Session_Topic = c("1. Why DMPs Matter", "2. Walkthrough of DMP Components", "Break", "3. Hands-On Drafting Session", "4. Peer Review & Edge Cases", "5. Tooling, Resources & Q&A"),
-  Core_Activities = c(
-    "Introduction to research data life cycle, funder compliance, avoiding data loss, and the FAIR Data Principles.",
-    "Interactive teardown of the 6 core pillars of a standard DMP template (Data Creation, Documentation, Ethics, Storage, Sharing, Responsibilities).",
-    "Refreshments & Networking",
-    "Participants use DMPonline / DMPTool or a structured template to draft sections for their own project.",
-    "Group evaluation of draft plans using a review checklist. Focus on high-risk areas (sensitive data, large file volumes, proprietary software).",
-    "Summary of institutional support, data repositories, DOI assignment, and final Q&A."
-  )
-)
-
-knitr::kable(
-  schedule_data, 
-  col.names = c("Time", "Duration", "Session Topic", "Core Activities & Focus"),
-  caption = "Half-Day Workshop Schedule"
-)
+!["Are we dealing with supervised or unsupervised
+learning?"](fig/schedule.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
 
 
 Detailed Session Breakdown
