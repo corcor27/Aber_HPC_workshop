@@ -239,55 +239,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="01-intro.html">1. Data management plans</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush3">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading3">
-        <a href="02-variables_and_basic_data_types.html">2. Foundation &amp; The FAIR Principles</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush4">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading4">
-        <a href="03-lists_and_dictionaries.html">3. Walkthrough of DMP Components</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush5">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading5">
-        <a href="04-libraries_and_imports.html">4. </a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush6">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading6">
-        <a href="05-exercise.html">5. </a>
+        <a href="01-intro.html">1. Introduction to High-Performance Computing (HPC)</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -373,79 +325,17 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Key Points</h1>
         
-<section id="01-intro"><h2 class="section-heading"><a href="01-intro.html">Data management plans</a></h2>
+<section id="01-intro"><h2 class="section-heading"><a href="01-intro.html">Introduction to High-Performance Computing (HPC)1. Load required environment modules<a class="anchor" aria-label="anchor" href="#load-required-environment-modules"></a>2. Print execution metadata<a class="anchor" aria-label="anchor" href="#print-execution-metadata"></a>3. Execute computational workload<a class="anchor" aria-label="anchor" href="#execute-computational-workload"></a></a></h2>
 <hr class="half-width">
 <ul>
-<li>AI in healthcare isn’t a futuristic concept; it is already operating
-in triaging, billing, and radiology.</li>
-<li>The explosion of healthcare AI is driven by three factors: massive
-computing power, digitized health records (EHRs), and an explosion of
-genomic data.</li>
-<li>Effective healthcare AI requires collaboration data scientists
-understand the math, but clinicians understand the patient.</li>
-</ul></section><section id="02-variables_and_basic_data_types"><h2 class="section-heading"><a href="02-variables_and_basic_data_types.html">Foundation &amp; The FAIR Principles</a></h2>
-<hr class="half-width">
-<ul>
-<li>DMPs are Living Tools, Not Paperwork: A Data Management Plan is a
-dynamic roadmap that evolves with your project, serving as an insurance
-policy against data corruption and misinterpretation.</li>
-<li>Proactive Curation Saves Time: Documenting metadata, variable names,
-and folder structures during data collection takes a fraction of the
-effort required to reconstruct them at the end of a project.</li>
-<li>As Open as Possible, As Closed as Necessary: Accessibility under
-FAIR does not violate ethical or GDPR boundaries. Restricted access
-protocols can protect participant privacy while keeping dataset metadata
-fully discoverable.</li>
-<li>Persistent Identifiers Matter: Using DOIs for datasets and linking
-them to your ORCID iD ensures proper citation, academic credit, and
-long-term traceability.</li>
-<li>Prioritize Non-Proprietary Formats: Storing data in open formats
-(e.g., .csv, .tiff, .flac) ensures your files remain readable decades
-after proprietary software licenses expire.</li>
-</ul></section><section id="03-lists_and_dictionaries"><h2 class="section-heading"><a href="03-lists_and_dictionaries.html">Walkthrough of DMP Components</a></h2>
-<hr class="half-width">
-<ul>
-<li>Standardize Formats Early: Always preserve an open-standard copy
-(.csv, .pdf, .flac, .tif) alongside your proprietary working files to
-ensure long-term readability.</li>
-<li>Document for a Stranger: Assume the person re-using your dataset has
-never spoken to you. Provide self-contained README files and data
-dictionaries.</li>
-<li>Protect Sensitive Data at the Consent Stage: Ethical data sharing
-begins with how informed consent forms are written. Include explicit
-wording permitting secondary research on anonymized outputs.</li>
-<li>Enforce 3-2-1 Backups: Never rely on a single laptop, USB drive, or
-unmanaged personal cloud folder for active research data.</li>
-<li>Assign Named Roles: Clearly assign named individuals (e.g., lead
-post-doc, lab manager, PI) to specific data tasks so accountability
-doesn’t fall through the cracks.</li>
-</ul></section><section id="04-libraries_and_imports"><h2 class="section-heading"><a href="04-libraries_and_imports.html">Persistent
-Identifier: DOI: 10.xxxx/zenodo.xxxxxxx</a></h2>
-<hr class="half-width">
-<ul>
-<li>Draft as You Work: Never wait until the final month of a grant to
-write your DMP documentation assets.</li>
-<li>Automate Format Exports: Integrate export rules (.csv, .pdf, .tif)
-directly into your computing pipelines.</li>
-<li>Lock Down Identifiers: Pseudonymize early and verify that linkage
-keys are stored separately from raw analytical files.</li>
-<li>Standardize Metadata From Day 1: Using ISO standards (e.g., ISO 8601
-for dates: YYYY-MM-DD) and clear missing value indicators (NA) prevents
-downstream analysis bugs.</li>
-</ul></section><section id="05-exercise"><h2 class="section-heading"><a href="05-exercise.html"></a></h2>
-<hr class="half-width">
-<ul>
-<li>Constructive Peer Review: Reviewing another researcher’s DMP often
-exposes gaps in your own backup and documentation assumptions.</li>
-<li>Metadata Can Be Open Even If Data Is Closed: Sensitive human or
-commercial data can remain FAIR by making its metadata discoverable
-while keeping raw files under controlled access.</li>
-<li>Distinguish Recomputable vs. Irreplaceable Data: Save raw inputs,
-seeds, and analytical code; destroy easily recomputable intermediate
-scratch files if storage space is constrained.</li>
-<li>A DMP is a Living Document: Revisit and update your plan at major
-project milestones, personnel transitions, or before submitting paper
-manuscripts.</li>
+<li>Login nodes are for navigation and submission; compute nodes are for
+computation.</li>
+<li>Slurm schedules resources based on your requests—estimate memory and
+time accurately.</li>
+<li>Respect storage quotas and purge temporary scratch files
+regularly.</li>
+<li>Check job accounting (sacct) after execution to optimize future
+resource requests.</li>
 </ul></section>
 </div>
     </main>
