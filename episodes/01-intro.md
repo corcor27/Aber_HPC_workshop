@@ -1,96 +1,144 @@
 ---
-title: Data management plans
+title: Introduction to High-Performance Computing (HPC)
 teaching: 30
 exercises: 0
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Understand Funder Requirements: Identify core expectations from major funding bodies regarding research data stewardship.
-- Apply the FAIR Principles: Operationalize Findability, Accessibility, Interoperability, and Reusability in daily workflows.
-- Draft a Section-by-Section DMP: Create a practical, living DMP for their current or upcoming research projects.
-- Budget & Risk Assess Data: Estimate costs associated with data storage, curation, anonymization, and long-term preservation.
+- Understand HPC Architecture: Differentiate between login nodes, compute nodes, and specialized accelerator hardware (GPUs).
+- Navigate System Hardware & Specs: Identify cluster resources, storage tiers, and system capabilities.
+- Comply with Usage Policies: Adhere to fair-share queue rules, storage quotas, and security guidelines.
+- Submit & Monitor Jobs: Draft and run job scripts using the Slurm workload manager.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Workshop Overview
-
-- Title: Designing Robust Data Management Plans (DMPs) for Research Success
-- Target Audience: Early Career Researchers (ECRs), PhD students, and Principal Investigators (PIs) across STEM and HSS disciplines.
-- Duration: 3 hours (Half-day interactive workshop)
-- Format: Hybrid / In-person hands-on workshop (Includes short lectures, individual exercises, group peer review, and tool demonstrations)
-- Key Tools Covered: DMPonline / DMPTool, institutional repositories, license selectors, and FAIR sharing registries.
-
-## Workshop Schedule
-
-!["Are we dealing with supervised or unsupervised
-learning?"](fig/schedule.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
-
-
-Detailed Session Breakdown
-Session 1: Foundation & The FAIR Principles (20 mins)
-
-- Data Lifecycles vs. Project Lifecycles: Moving beyond project end-dates to long-term stewardship.
-- FAIR Principles Breakdown:
-  - Findable: Persistent Identifiers (DOIs, ORCIDs), rich metadata.
-  - Accessible: Standard communications protocols, open vs. restricted access routes.
-  - Interoperable: Standard formats, controlled vocabularies, ontologies.
-  - Reusable: Clear licensing (e.g., Creative Commons, MIT), provenance documentation.
-
-Session 2: The Core Components of a DMP (55 mins)
-
-1. Data Collection & Types:
-  - Distinguishing between raw, processed, and final research outputs.
-  - File formats: Choosing non-proprietary formats for long-term sustainability (e.g., .csv over .xlsx, .flac or .wav over .mp3).
-  - Volume estimates and storage scaling.
-2. Documentation & Metadata:
-  - README file structures, codebook design, and data dictionaries.
-  - Discipline-specific metadata standards (e.g., Dublin Core, DDI, Schema.org).
-3. Ethics, Legal & Intellectual Property:
-  - Handling sensitive data: Consent forms for data sharing, anonymization vs. pseudonomization, GDPR/data protection alignment.
-  - Copyright, ownership (university vs. funder vs. researcher), and choosing open licenses.
-4. Storage, Backup & Security:
-  - The 3-2-1 Backup Strategy (3 copies, 2 different media, 1 offsite/cloud).
-  - Encryption protocols for sensitive data in transit and at rest.
-5. Selection, Preservation & Sharing:
-  - Deciding what data to keep vs. what to destroy.
-  - Choosing a repository (Generalist vs. Domain-Specific vs. Institutional).
-6. Responsibilities & Resources:
-  - Roles (who maintains the data during and after the project).
-  - Costing data management into grant applications (e.g., repository fees, transcription costs, curation effort).
-
-Session 3: Practical Drafting Exercise (45 mins)
-
-Activity Prompt: Participants log into DMPonline/DMPTool or open the provided Word template and complete three target sections:
-- Section A: Data Description & Formats.
-- Section B: Ethics, Access Rights, and Anonymization Plan.
-- Section C: Storage, Backup, and Long-Term Preservation Strategy.
-
-Exercise Facilitator Tip: Circulate around the room to address specific technical edge cases (e.g., high-performance computing storage limits, commercial restrictions, biological or human subject data constraints).
-
-Session 4: Peer Review Matrix & High-Risk Scenario Analysis (30 mins)
-
-Group Case Study Options (10 mins discussion):
-- Scenario A: Managing several terabytes of imaging/sensor outputs on high-performance compute clusters.
-- Scenario B: Sharing anonymized interview transcripts with sensitive clinical context.
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- "What ML/AI tools are you already aware of in healthcare, and what is your immediate gut reaction to them optimism, skepticism, or anxiety?"
-- "Where do you think AI can make the biggest impact in your day-to-day workflow: reducing paperwork or assisting in patient diagnosis?"
+- "Why should you never run heavy Python data analysis or deep learning scripts directly on the login node?"
+- "If your job requires 120 GB of memory and 2 GPUs, what happens if you forget to specify --mem in your Slurm script?"
+- "What is the difference between /home and /scratch in terms of performance and data security?"
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+Session Breakdown & Content
+Session 1: What is HPC & How Does It Work? (10 mins)
+1.1 Desktop vs. Cluster Computing
 
+    Local Machine: Single system where interactive GUI, CPU, memory, and storage share the same bus. Great for development, bad for scale.
 
+    HPC Cluster: A collection of network-connected servers (nodes) operating as a unified system to handle heavy computational loads.
+
+1.2 The Anatomy of a Cluster
+
+    Login Head Nodes: The front door of the cluster. Used only for editing code, managing files, and submitting jobs. Never run computational tasks directly on login nodes.
+
+    Compute Nodes: The worker units where actual execution happens in isolated job environments.
+
+    Interconnect: High-speed networks connecting nodes to shared parallel storage.
+    
+
+Session 2: System Specs & Environment Setup (15 mins)
+
+(Fill in the bracketed placeholders below with your cluster details.)
+2.1 Hardware Specifications Overview
+
+    Compute Architecture: [INSERT: e.g., x86_64 / Rocky Linux / Ubuntu]
+
+    Total Compute Nodes: [INSERT: Total node count]
+
+    CPU Resources: [INSERT: e.g., AMD EPYC / Intel Xeon cores per node]
+
+    GPU Accelerator Resources: [INSERT: e.g., NVIDIA A100 / H100 / L40S specs]
+
+    Interconnect: [INSERT: e.g., InfiniBand 100Gbps / Ethernet]
+    
+2.2 Storage Tiers & Quotas
+
+2.3 Software & Environment Management
+
+    Lmod / Environment Modules: Software on HPC systems is loaded dynamically to avoid library conflicts.
+
+    Common Commands:
+
+        module avail — List available software packages.
+
+        module load [package_name] — Load a tool into your current session.
+
+        module list — Display currently active modules.
+
+Session 3: Usage Policy & System Etiquette (10 mins)
+3.1 Acceptable Use Rules
+
+    Login Node Etiquette: No high-CPU, high-RAM, or multi-threaded jobs on login nodes. Rogue processes will be terminated automatically.
+
+    Resource Request Accuracy: Request only the CPUs, GPUs, memory, and walltime your job actually needs. Over-requesting leads to longer queue wait times and starves other users.
+
+    Fair-Share Priority: Prioritization is calculated algorithmically based on recent resource consumption.
+
+3.2 Specific Cluster Policy Limits
+
+    GPU Allocation Cap: [INSERT: e.g., Maximum 8 GPUs per user across active jobs]
+
+    Job Runtime Limits: [INSERT: e.g., Default queue max walltime 48 hours]
+
+    Account Security & SSH: Shared accounts are strictly prohibited. Multi-factor authentication or SSH key access required.
+
+    Data Cleanup Responsibilities: Users are required to purge /scratch space regularly.
+
+Session 4: Submitting & Managing Jobs with Slurm (15 mins)
+4.1 Anatomy of a Slurm Batch Script (submit.sh)
+:::::::::::::::::::::::::::::::::::::::: bash
+#!/bin/bash
+#SBATCH --job-name=hpc_demo
+#SBATCH --output=logs/job_%j.out
+#SBATCH --error=logs/job_%j.err
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --time=01:00:00
+#SBATCH --partition=[INSERT_PARTITION_NAME]
+#SBATCH --account=[INSERT_ACCOUNT_NAME]
+
+# 1. Load required environment modules
+module load python/3.11
+
+# 2. Print execution metadata
+echo "Job started on node: $(hostname) at $(date)"
+
+# 3. Execute computational workload
+python3 my_script.py
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+4.2 Essential Slurm Commands
+
+Session 5: Wrap-Up, Troubleshooting & Q&A (10 mins)
+5.1 Common Troubleshooting Scenarios
+
+    OUT_OF_MEMORY (OOM) Errors: Job exceeded requested RAM (--mem). Increase memory limit in #SBATCH header.
+
+    TIMEOUT Errors: Job ran longer than requested --time. Increase requested walltime or implement checkpointing.
+
+    Pending Job Reason ReqNodeNotAvailable / QOSResourceLimit: Job requests exceed max policy limits or hardware availability.
+
+5.2 Support Channels & Resources
+
+    Cluster Documentation: [INSERT: Link to wiki / docs]
+
+    Helpdesk / Ticketing: [INSERT: Support email / ticket portal]
+
+    System Status & Maintenance: [INSERT: Status page URL]
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- AI in healthcare isn't a futuristic concept; it is already operating in triaging, billing, and radiology.
-- The explosion of healthcare AI is driven by three factors: massive computing power, digitized health records (EHRs), and an explosion of genomic data.
-- Effective healthcare AI requires collaboration data scientists understand the math, but clinicians understand the patient.
-
+- Login nodes are for navigation and submission; compute nodes are for computation.
+- Slurm schedules resources based on your requests—estimate memory and time accurately.
+- Respect storage quotas and purge temporary scratch files regularly.
+- Check job accounting (sacct) after execution to optimize future resource requests.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
