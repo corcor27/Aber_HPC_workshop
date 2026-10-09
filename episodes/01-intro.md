@@ -112,6 +112,9 @@ exercises: 0
 - **CPU:** AMD EPYC 7452 (155W)  
 - **Memory:** 768GB  
 
+!["Are we dealing with supervised or unsupervised
+learning?"](fig/hpc_upgrade.png){alt="Flow Diagram for determining supvervised vs unsupervised"}.
+
 ### 2.1 Hardware Specifications Overview
 
 - Compute Architecture: [Rocky Linux]
