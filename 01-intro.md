@@ -23,73 +23,140 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Session Breakdown & Content
-Session 1: What is HPC & How Does It Work? (10 mins)
-1.1 Desktop vs. Cluster Computing
 
-    Local Machine: Single system where interactive GUI, CPU, memory, and storage share the same bus. Great for development, bad for scale.
+## Section 1: What is HPC & How Does It Work?
 
-    HPC Cluster: A collection of network-connected servers (nodes) operating as a unified system to handle heavy computational loads.
+### 1.1 Desktop vs. Cluster Computing
+- Local Machine: Single system where interactive GUI, CPU, memory, and storage share the same bus. Great for development, bad for scale.
+- HPC Cluster: A collection of network-connected servers (nodes) operating as a unified system to handle heavy computational loads.
 
-1.2 The Anatomy of a Cluster
+### 1.2 The Anatomy of a Cluster
 
-    Login Head Nodes: The front door of the cluster. Used only for editing code, managing files, and submitting jobs. Never run computational tasks directly on login nodes.
-
-    Compute Nodes: The worker units where actual execution happens in isolated job environments.
-
-    Interconnect: High-speed networks connecting nodes to shared parallel storage.
+- Login Head Nodes: The front door of the cluster. Used only for editing code, managing files, and submitting jobs. Never run computational tasks directly on login nodes.
+- Compute Nodes: The worker units where actual execution happens in isolated job environments.
+- Interconnect: High-speed networks connecting nodes to shared parallel storage.
     
+## Section 2: System Specs & Environment Setup 
 
-Session 2: System Specs & Environment Setup (15 mins)
+### HPC Hardware Overview
 
-(Fill in the bracketed placeholders below with your cluster details.)
-2.1 Hardware Specifications Overview
+### Bert (Log-in Node) — TDP 120W
+- **CPU:** AMD EPYC 7252 (8-Core, 120W)  
+- **Memory:** 48GB  
 
-    Compute Architecture: [INSERT: e.g., x86_64 / Rocky Linux / Ubuntu]
+---
 
-    Total Compute Nodes: [INSERT: Total node count]
+### Ernie (x3) — TDP 200W each | Total 600W
+- **CPU:** AMD EPYC 7552 (48-Core, 2.2GHz, 200W)  
+- **Memory:** 384GB  
 
-    CPU Resources: [INSERT: e.g., AMD EPYC / Intel Xeon cores per node]
+---
 
-    GPU Accelerator Resources: [INSERT: e.g., NVIDIA A100 / H100 / L40S specs]
+### hpc-gn-ampere-01 (AM-01) — TDP 2880W
+- **GPU:** 8 × NVIDIA A100 (80GB VRAM each, 300W | 2400W total)  
+- **CPU:** 2 × AMD EPYC 7F72 (24-Core, 240W | 480W total)  
+- **Memory:** 2TB  
 
-    Interconnect: [INSERT: e.g., InfiniBand 100Gbps / Ethernet]
+---
+
+### hpc-ci-cascade-lake-01 (CL-01) — TDP 410W
+- **CPU:** 2 × Intel Xeon Gold 6248R (3.0GHz, 205W | 410W total)  
+- **Memory:** 1.5TB  
+
+---
+
+### hpc-gn-ampere-03 (AM-03) — TDP 2800W
+- **GPU:** 8 × NVIDIA A100 (80GB VRAM each, 300W | 2400W total)  
+- **CPU:** 2 × AMD EPYC 7702 (64-Core, 200W | 400W total)  
+- **Memory:** 2TB  
+
+---
+
+### hpc-gn-ampere-04 (AM-04) — TDP 2800W
+- **GPU:** 8 × NVIDIA A100 (80GB VRAM each, 300W | 2400W total)  
+- **CPU:** 2 × AMD EPYC 7702 (64-Core, 200W | 400W total)  
+- **Memory:** 2TB  
+
+---
+
+### hpc-gn-pascal-01 (PA-01) — TDP 625W
+- **GPU:** 2 × NVIDIA Tesla P100 (16GB VRAM each, 250W | 500W total)  
+- **CPU:** Intel Xeon Gold 6130 (2.1GHz, 125W)  
+- **Memory:** 48GB  
+- **Note:** Legacy GPU server  
+
+---
+
+### hpc-gn-hopper-01 (HO-01) — TDP 3520W
+- **GPU:** 4 × NVIDIA H100 (94GB VRAM each, 700W | 2800W total, configurable to 400W each)  
+- **CPU:** 2 × AMD EPYC Genoa 9654 (96-Core, 2.4GHz, 360W | 720W total)  
+- **Memory:** 2TB  
+
+---
+
+### Cascade Lake Cluster (CL-02 to CL-06) — TDP 250W (standard) | 750W (optional)
+- **Nodes:** CL-02, CL-03, CL-04, CL-05, CL-06  
+- **CPU (each):** 2 × Intel Xeon Gold 6254 (3.1GHz, 125W | 250W total)  
+- **Memory (each):** 768GB  
+
+---
+
+### hpc-ca-genoa-01 (GE-01) — TDP 115W
+- **CPU:** Intel Xeon E5-2620 v4 (2.1GHz, 115W)  
+- **Memory:** 1TB  
+
+---
+
+### hpc-gn-ampere-05 (AM-05) — TDP 455W
+- **GPU:** 1 × NVIDIA A100 (40GB VRAM, 300W)  
+- **CPU:** AMD EPYC 7452 (155W)  
+- **Memory:** 768GB  
+
+### 2.1 Hardware Specifications Overview
+
+- Compute Architecture: [INSERT: e.g., x86_64 / Rocky Linux / Ubuntu]
+- Total Compute Nodes: [INSERT: Total node count]
+- CPU Resources: [INSERT: e.g., AMD EPYC / Intel Xeon cores per node]
+- GPU Accelerator Resources: [INSERT: e.g., NVIDIA A100 / H100 / L40S specs]
+- Interconnect: [INSERT: e.g., InfiniBand 100Gbps / Ethernet]
     
-2.2 Storage Tiers & Quotas
+### 2.2 Storage Tiers & Quotas
 
-2.3 Software & Environment Management
+Here's a synopsis of filesystems on the cluster at Aberystwyth:
 
-    Lmod / Environment Modules: Software on HPC systems is loaded dynamically to avoid library conflicts.
+|Name|Path|Default Quota|Disk Size|Backed Up|Filesystem
+|-----------------|---|----|-----|---|-----|------|
+|Home|/hpc/user.name|100GB|40TB |Yes|NFS|
+|Scratch|/scratch/user.name|N/A|100TB|No|NFS|
 
-    Common Commands:
+**Important!! Ensure that you don't store anything longer than necessary on scratch, this can negatively affect other people’s jobs on the system.**
 
-        module avail — List available software packages.
+### 2.3 Software & Environment Management
 
-        module load [package_name] — Load a tool into your current session.
+- Lmod / Environment Modules: Software on HPC systems is loaded dynamically to avoid library conflicts.
+- Common Commands:
+  - module avail — List available software packages.
+  - module load [package_name] — Load a tool into your current session.
+  - module list — Display currently active modules.
 
-        module list — Display currently active modules.
+## Section 3: Usage Policy & System Etiquette (10 mins)
+### 3.1 Acceptable Use Rules
 
-Session 3: Usage Policy & System Etiquette (10 mins)
-3.1 Acceptable Use Rules
+- Login Node Etiquette: No high-CPU, high-RAM, or multi-threaded jobs on login nodes. Rogue processes will be terminated automatically.
+- Resource Request Accuracy: Request only the CPUs, GPUs, memory, and walltime your job actually needs. Over-requesting leads to longer queue wait times and starves other users.
+- Fair-Share Priority: Prioritization is calculated algorithmically based on recent resource consumption.
 
-    Login Node Etiquette: No high-CPU, high-RAM, or multi-threaded jobs on login nodes. Rogue processes will be terminated automatically.
+### 3.2 Specific Cluster Policy Limits
 
-    Resource Request Accuracy: Request only the CPUs, GPUs, memory, and walltime your job actually needs. Over-requesting leads to longer queue wait times and starves other users.
+- GPU Allocation Cap: [INSERT: e.g., Maximum 8 GPUs per user across active jobs]
+- Job Runtime Limits: [INSERT: e.g., Default queue max walltime 48 hours]
+- Account Security & SSH: Shared accounts are strictly prohibited. Multi-factor authentication or SSH key access required.
+- Data Cleanup Responsibilities: Users are required to purge /scratch space regularly.
 
-    Fair-Share Priority: Prioritization is calculated algorithmically based on recent resource consumption.
+## Section 4: Submitting & Managing Jobs with Slurm (15 mins)
 
-3.2 Specific Cluster Policy Limits
+### 4.1 Anatomy of a Slurm Batch Script (submit.sh)
 
-    GPU Allocation Cap: [INSERT: e.g., Maximum 8 GPUs per user across active jobs]
-
-    Job Runtime Limits: [INSERT: e.g., Default queue max walltime 48 hours]
-
-    Account Security & SSH: Shared accounts are strictly prohibited. Multi-factor authentication or SSH key access required.
-
-    Data Cleanup Responsibilities: Users are required to purge /scratch space regularly.
-
-Session 4: Submitting & Managing Jobs with Slurm (15 mins)
-4.1 Anatomy of a Slurm Batch Script (submit.sh)
 :::::::::::::::::::::::::::::::::::::::: bash
 #!/bin/bash
 #SBATCH --job-name=hpc_demo
@@ -114,24 +181,21 @@ python3 my_script.py
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-4.2 Essential Slurm Commands
+### 4.2 Essential Slurm Commands
 
-Session 5: Wrap-Up, Troubleshooting & Q&A (10 mins)
-5.1 Common Troubleshooting Scenarios
+## Section 5: Wrap-Up, Troubleshooting & Q&A (10 mins)
 
-    OUT_OF_MEMORY (OOM) Errors: Job exceeded requested RAM (--mem). Increase memory limit in #SBATCH header.
+### 5.1 Common Troubleshooting Scenarios
 
-    TIMEOUT Errors: Job ran longer than requested --time. Increase requested walltime or implement checkpointing.
+- OUT_OF_MEMORY (OOM) Errors: Job exceeded requested RAM (--mem). Increase memory limit in #SBATCH header.
+- TIMEOUT Errors: Job ran longer than requested --time. Increase requested walltime or implement checkpointing.
+- Pending Job Reason ReqNodeNotAvailable / QOSResourceLimit: Job requests exceed max policy limits or hardware availability.
 
-    Pending Job Reason ReqNodeNotAvailable / QOSResourceLimit: Job requests exceed max policy limits or hardware availability.
+### 5.2 Support Channels & Resources
 
-5.2 Support Channels & Resources
-
-    Cluster Documentation: [INSERT: Link to wiki / docs]
-
-    Helpdesk / Ticketing: [INSERT: Support email / ticket portal]
-
-    System Status & Maintenance: [INSERT: Status page URL]
+- Cluster Documentation: [INSERT: Link to wiki / docs]
+- Helpdesk / Ticketing: [INSERT: Support email / ticket portal]
+- System Status & Maintenance: [INSERT: Status page URL]
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
