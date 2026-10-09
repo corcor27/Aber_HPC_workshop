@@ -157,7 +157,7 @@ Here's a synopsis of filesystems on the cluster at Aberystwyth:
 
 ### 4.1 Anatomy of a Slurm Batch Script (submit.sh)
 
-'''
+'''bash
 #!/bin/bash
 #SBATCH --job-name=hpc_demo
 #SBATCH --output=logs/job_%j.out
@@ -180,7 +180,7 @@ echo "Job started on node: $(hostname) at $(date)"
 python my_script.py
 
 '''
-{: .bash}
+
 
 ### 4.2 Essential Slurm Commands
 
