@@ -327,7 +327,7 @@
         
 <section id="aio-01-intro"><p>Content from <a href="01-intro.html">Introduction to High-Performance Computing (HPC)</a></p>
 <hr>
-<p>Last updated on 2026-10-07 |
+<p>Last updated on 2026-10-09 |
 
         <a href="https://github.com/corcor27/HCRW-workshop/edit/main/episodes/01-intro.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -371,86 +371,316 @@ workload manager.</li>
 </div>
 </div>
 </div>
-<p>Session Breakdown &amp; Content Session 1: What is HPC &amp; How Does
-It Work? (10 mins) 1.1 Desktop vs. Cluster Computing</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<section><h2 class="section-heading" id="section-1-what-is-hpc-how-does-it-work">Section 1: What is HPC &amp; How Does It Work?<a class="anchor" aria-label="anchor" href="#section-1-what-is-hpc-how-does-it-work"></a>
+</h2>
+<hr class="half-width">
+<div class="section level3">
+<h3 id="desktop-vs--cluster-computing">1.1 Desktop vs. Cluster Computing<a class="anchor" aria-label="anchor" href="#desktop-vs--cluster-computing"></a>
 </h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="ex">Local</span> Machine: Single system where interactive GUI, CPU, memory, and storage share the same bus. Great for development, bad for scale.</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="ex">HPC</span> Cluster: A collection of network-connected servers <span class="er">(</span><span class="ex">nodes</span><span class="kw">)</span> <span class="ex">operating</span> as a unified system to handle heavy computational loads.</span></code></pre>
+<ul>
+<li>Local Machine: Single system where interactive GUI, CPU, memory, and
+storage share the same bus. Great for development, bad for scale.</li>
+<li>HPC Cluster: A collection of network-connected servers (nodes)
+operating as a unified system to handle heavy computational loads.</li>
+</ul>
 </div>
-<p>1.2 The Anatomy of a Cluster</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<div class="section level3">
+<h3 id="the-anatomy-of-a-cluster">1.2 The Anatomy of a Cluster<a class="anchor" aria-label="anchor" href="#the-anatomy-of-a-cluster"></a>
 </h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="ex">Login</span> Head Nodes: The front door of the cluster. Used only for editing code, managing files, and submitting jobs. Never run computational tasks directly on login nodes.</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="ex">Compute</span> Nodes: The worker units where actual execution happens in isolated job environments.</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1" aria-label="code-block-2-5"></a><span class="ex">Interconnect:</span> High-speed networks connecting nodes to shared parallel storage.</span></code></pre>
+<ul>
+<li>Login Head Nodes: The front door of the cluster. Used only for
+editing code, managing files, and submitting jobs. Never run
+computational tasks directly on login nodes.</li>
+<li>Compute Nodes: The worker units where actual execution happens in
+isolated job environments.</li>
+<li>Interconnect: High-speed networks connecting nodes to shared
+parallel storage.</li>
+</ul>
 </div>
-<p>Session 2: System Specs &amp; Environment Setup (15 mins)</p>
-<p>(Fill in the bracketed placeholders below with your cluster details.)
-2.1 Hardware Specifications Overview</p>
-<div class="codewrapper sourceCode" id="cb3">
-<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</section><section><h2 class="section-heading" id="section-2-system-specs-environment-setup">Section 2: System Specs &amp; Environment Setup<a class="anchor" aria-label="anchor" href="#section-2-system-specs-environment-setup"></a>
+</h2>
+<hr class="half-width">
+<div class="section level3">
+<h3 id="hpc-hardware-overview">HPC Hardware Overview<a class="anchor" aria-label="anchor" href="#hpc-hardware-overview"></a>
 </h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="ex">Compute</span> Architecture: [INSERT: e.g., x86_64 / Rocky Linux / Ubuntu]</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="ex">Total</span> Compute Nodes: [INSERT: Total node count]</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1" aria-label="code-block-3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1" aria-label="code-block-3-5"></a><span class="ex">CPU</span> Resources: [INSERT: e.g., AMD EPYC / Intel Xeon cores per node]</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1" aria-label="code-block-3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1" aria-label="code-block-3-7"></a><span class="ex">GPU</span> Accelerator Resources: [INSERT: e.g., NVIDIA A100 / H100 / L40S specs]</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1" aria-label="code-block-3-8"></a></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1" aria-label="code-block-3-9"></a><span class="ex">Interconnect:</span> [INSERT: e.g., InfiniBand 100Gbps / Ethernet]</span></code></pre>
 </div>
-<p>2.2 Storage Tiers &amp; Quotas</p>
-<p>2.3 Software &amp; Environment Management</p>
-<div class="codewrapper sourceCode" id="cb4">
-<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<div class="section level3">
+<h3 id="bert-log-in-node-tdp-120w">Bert (Log-in Node) — TDP 120W<a class="anchor" aria-label="anchor" href="#bert-log-in-node-tdp-120w"></a>
 </h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="ex">Lmod</span> / Environment Modules: Software on HPC systems is loaded dynamically to avoid library conflicts.</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1" aria-label="code-block-4-3"></a><span class="ex">Common</span> Commands:</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1" aria-label="code-block-4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1" aria-label="code-block-4-5"></a>    <span class="ex">module</span> avail — List available software packages.</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1" aria-label="code-block-4-6"></a></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1" aria-label="code-block-4-7"></a>    <span class="ex">module</span> load <span class="pp">[</span><span class="ss">package_name</span><span class="pp">]</span> — Load a tool into your current session.</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1" aria-label="code-block-4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1" aria-label="code-block-4-9"></a>    <span class="ex">module</span> list — Display currently active modules.</span></code></pre>
+<ul>
+<li>
+<strong>CPU:</strong> AMD EPYC 7252 (8-Core, 120W)<br>
+</li>
+<li>
+<strong>Memory:</strong> 48GB</li>
+</ul>
+<hr>
 </div>
-<p>Session 3: Usage Policy &amp; System Etiquette (10 mins) 3.1
-Acceptable Use Rules</p>
-<div class="codewrapper sourceCode" id="cb5">
-<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<div class="section level3">
+<h3 id="ernie-x3-tdp-200w-each-total-600w">Ernie (x3) — TDP 200W each | Total 600W<a class="anchor" aria-label="anchor" href="#ernie-x3-tdp-200w-each-total-600w"></a>
 </h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="ex">Login</span> Node Etiquette: No high-CPU, high-RAM, or multi-threaded jobs on login nodes. Rogue processes will be terminated automatically.</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1" aria-label="code-block-5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1" aria-label="code-block-5-3"></a><span class="ex">Resource</span> Request Accuracy: Request only the CPUs, GPUs, memory, and walltime your job actually needs. Over-requesting leads to longer queue wait times and starves other users.</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1" aria-label="code-block-5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1" aria-label="code-block-5-5"></a><span class="ex">Fair-Share</span> Priority: Prioritization is calculated algorithmically based on recent resource consumption.</span></code></pre>
+<ul>
+<li>
+<strong>CPU:</strong> AMD EPYC 7552 (48-Core, 2.2GHz, 200W)<br>
+</li>
+<li>
+<strong>Memory:</strong> 384GB</li>
+</ul>
+<hr>
 </div>
-<p>3.2 Specific Cluster Policy Limits</p>
-<div class="codewrapper sourceCode" id="cb6">
-<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<div class="section level3">
+<h3 id="hpc-gn-ampere-01-am-01-tdp-2880w">hpc-gn-ampere-01 (AM-01) — TDP 2880W<a class="anchor" aria-label="anchor" href="#hpc-gn-ampere-01-am-01-tdp-2880w"></a>
 </h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">GPU</span> Allocation Cap: [INSERT: e.g., Maximum 8 GPUs per user across active jobs]</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1" aria-label="code-block-6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a><span class="ex">Job</span> Runtime Limits: [INSERT: e.g., Default queue max walltime 48 hours]</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1" aria-label="code-block-6-4"></a></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1" aria-label="code-block-6-5"></a><span class="ex">Account</span> Security <span class="kw">&amp;</span> <span class="ex">SSH:</span> Shared accounts are strictly prohibited. Multi-factor authentication or SSH key access required.</span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1" aria-label="code-block-6-6"></a></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1" aria-label="code-block-6-7"></a><span class="ex">Data</span> Cleanup Responsibilities: Users are required to purge /scratch space regularly.</span></code></pre>
+<ul>
+<li>
+<strong>GPU:</strong> 8 × NVIDIA A100 (80GB VRAM each, 300W | 2400W
+total)<br>
+</li>
+<li>
+<strong>CPU:</strong> 2 × AMD EPYC 7F72 (24-Core, 240W | 480W
+total)<br>
+</li>
+<li>
+<strong>Memory:</strong> 2TB</li>
+</ul>
+<hr>
 </div>
-<p>Session 4: Submitting &amp; Managing Jobs with Slurm (15 mins) 4.1
-Anatomy of a Slurm Batch Script (submit.sh)
-:::::::::::::::::::::::::::::::::::::::: bash #!/bin/bash #SBATCH
-–job-name=hpc_demo #SBATCH –output=logs/job_%j.out #SBATCH
-–error=logs/job_%j.err #SBATCH –nodes=1 #SBATCH –ntasks=1 #SBATCH
-–cpus-per-task=4 #SBATCH –mem=16G #SBATCH –time=01:00:00 #SBATCH
-–partition=[INSERT_PARTITION_NAME] #SBATCH
+<div class="section level3">
+<h3 id="hpc-ci-cascade-lake-01-cl-01-tdp-410w">hpc-ci-cascade-lake-01 (CL-01) — TDP 410W<a class="anchor" aria-label="anchor" href="#hpc-ci-cascade-lake-01-cl-01-tdp-410w"></a>
+</h3>
+<ul>
+<li>
+<strong>CPU:</strong> 2 × Intel Xeon Gold 6248R (3.0GHz, 205W | 410W
+total)<br>
+</li>
+<li>
+<strong>Memory:</strong> 1.5TB</li>
+</ul>
+<hr>
+</div>
+<div class="section level3">
+<h3 id="hpc-gn-ampere-03-am-03-tdp-2800w">hpc-gn-ampere-03 (AM-03) — TDP 2800W<a class="anchor" aria-label="anchor" href="#hpc-gn-ampere-03-am-03-tdp-2800w"></a>
+</h3>
+<ul>
+<li>
+<strong>GPU:</strong> 8 × NVIDIA A100 (80GB VRAM each, 300W | 2400W
+total)<br>
+</li>
+<li>
+<strong>CPU:</strong> 2 × AMD EPYC 7702 (64-Core, 200W | 400W
+total)<br>
+</li>
+<li>
+<strong>Memory:</strong> 2TB</li>
+</ul>
+<hr>
+</div>
+<div class="section level3">
+<h3 id="hpc-gn-ampere-04-am-04-tdp-2800w">hpc-gn-ampere-04 (AM-04) — TDP 2800W<a class="anchor" aria-label="anchor" href="#hpc-gn-ampere-04-am-04-tdp-2800w"></a>
+</h3>
+<ul>
+<li>
+<strong>GPU:</strong> 8 × NVIDIA A100 (80GB VRAM each, 300W | 2400W
+total)<br>
+</li>
+<li>
+<strong>CPU:</strong> 2 × AMD EPYC 7702 (64-Core, 200W | 400W
+total)<br>
+</li>
+<li>
+<strong>Memory:</strong> 2TB</li>
+</ul>
+<hr>
+</div>
+<div class="section level3">
+<h3 id="hpc-gn-pascal-01-pa-01-tdp-625w">hpc-gn-pascal-01 (PA-01) — TDP 625W<a class="anchor" aria-label="anchor" href="#hpc-gn-pascal-01-pa-01-tdp-625w"></a>
+</h3>
+<ul>
+<li>
+<strong>GPU:</strong> 2 × NVIDIA Tesla P100 (16GB VRAM each, 250W |
+500W total)<br>
+</li>
+<li>
+<strong>CPU:</strong> Intel Xeon Gold 6130 (2.1GHz, 125W)<br>
+</li>
+<li>
+<strong>Memory:</strong> 48GB<br>
+</li>
+<li>
+<strong>Note:</strong> Legacy GPU server</li>
+</ul>
+<hr>
+</div>
+<div class="section level3">
+<h3 id="hpc-gn-hopper-01-ho-01-tdp-3520w">hpc-gn-hopper-01 (HO-01) — TDP 3520W<a class="anchor" aria-label="anchor" href="#hpc-gn-hopper-01-ho-01-tdp-3520w"></a>
+</h3>
+<ul>
+<li>
+<strong>GPU:</strong> 4 × NVIDIA H100 (94GB VRAM each, 700W | 2800W
+total, configurable to 400W each)<br>
+</li>
+<li>
+<strong>CPU:</strong> 2 × AMD EPYC Genoa 9654 (96-Core, 2.4GHz, 360W
+| 720W total)<br>
+</li>
+<li>
+<strong>Memory:</strong> 2TB</li>
+</ul>
+<hr>
+</div>
+<div class="section level3">
+<h3 id="cascade-lake-cluster-cl-02-to-cl-06-tdp-250w-standard-750w-optional">Cascade Lake Cluster (CL-02 to CL-06) — TDP 250W (standard) | 750W
+(optional)<a class="anchor" aria-label="anchor" href="#cascade-lake-cluster-cl-02-to-cl-06-tdp-250w-standard-750w-optional"></a>
+</h3>
+<ul>
+<li>
+<strong>Nodes:</strong> CL-02, CL-03, CL-04, CL-05, CL-06<br>
+</li>
+<li>
+<strong>CPU (each):</strong> 2 × Intel Xeon Gold 6254 (3.1GHz, 125W
+| 250W total)<br>
+</li>
+<li>
+<strong>Memory (each):</strong> 768GB</li>
+</ul>
+<hr>
+</div>
+<div class="section level3">
+<h3 id="hpc-ca-genoa-01-ge-01-tdp-115w">hpc-ca-genoa-01 (GE-01) — TDP 115W<a class="anchor" aria-label="anchor" href="#hpc-ca-genoa-01-ge-01-tdp-115w"></a>
+</h3>
+<ul>
+<li>
+<strong>CPU:</strong> Intel Xeon E5-2620 v4 (2.1GHz, 115W)<br>
+</li>
+<li>
+<strong>Memory:</strong> 1TB</li>
+</ul>
+<hr>
+</div>
+<div class="section level3">
+<h3 id="hpc-gn-ampere-05-am-05-tdp-455w">hpc-gn-ampere-05 (AM-05) — TDP 455W<a class="anchor" aria-label="anchor" href="#hpc-gn-ampere-05-am-05-tdp-455w"></a>
+</h3>
+<ul>
+<li>
+<strong>GPU:</strong> 1 × NVIDIA A100 (40GB VRAM, 300W)<br>
+</li>
+<li>
+<strong>CPU:</strong> AMD EPYC 7452 (155W)<br>
+</li>
+<li>
+<strong>Memory:</strong> 768GB</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="hardware-specifications-overview">2.1 Hardware Specifications Overview<a class="anchor" aria-label="anchor" href="#hardware-specifications-overview"></a>
+</h3>
+<ul>
+<li>Compute Architecture: [INSERT: e.g., x86_64 / Rocky Linux /
+Ubuntu]</li>
+<li>Total Compute Nodes: [INSERT: Total node count]</li>
+<li>CPU Resources: [INSERT: e.g., AMD EPYC / Intel Xeon cores per
+node]</li>
+<li>GPU Accelerator Resources: [INSERT: e.g., NVIDIA A100 / H100 / L40S
+specs]</li>
+<li>Interconnect: [INSERT: e.g., InfiniBand 100Gbps / Ethernet]</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="storage-tiers-quotas">2.2 Storage Tiers &amp; Quotas<a class="anchor" aria-label="anchor" href="#storage-tiers-quotas"></a>
+</h3>
+<p>Here’s a synopsis of filesystems on the cluster at Aberystwyth:</p>
+<table class="table">
+<thead><tr>
+<th>Name</th>
+<th>Path</th>
+<th>Default Quota</th>
+<th>Disk Size</th>
+<th>Backed Up</th>
+<th>Filesystem</th>
+<th></th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Home</td>
+<td>/hpc/user.name</td>
+<td>100GB</td>
+<td>40TB</td>
+<td>Yes</td>
+<td>NFS</td>
+<td></td>
+</tr>
+<tr>
+<td>Scratch</td>
+<td>/scratch/user.name</td>
+<td>N/A</td>
+<td>100TB</td>
+<td>No</td>
+<td>NFS</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important!! Ensure that you don’t store anything longer than
+necessary on scratch, this can negatively affect other people’s jobs on
+the system.</strong></p>
+</div>
+<div class="section level3">
+<h3 id="software-environment-management">2.3 Software &amp; Environment Management<a class="anchor" aria-label="anchor" href="#software-environment-management"></a>
+</h3>
+<ul>
+<li>Lmod / Environment Modules: Software on HPC systems is loaded
+dynamically to avoid library conflicts.</li>
+<li>Common Commands:
+<ul>
+<li>module avail — List available software packages.</li>
+<li>module load [package_name] — Load a tool into your current
+session.</li>
+<li>module list — Display currently active modules.</li>
+</ul>
+</li>
+</ul>
+</div>
+</section><section><h2 class="section-heading" id="section-3-usage-policy-system-etiquette-10-mins">Section 3: Usage Policy &amp; System Etiquette (10 mins)<a class="anchor" aria-label="anchor" href="#section-3-usage-policy-system-etiquette-10-mins"></a>
+</h2>
+<hr class="half-width">
+<div class="section level3">
+<h3 id="acceptable-use-rules">3.1 Acceptable Use Rules<a class="anchor" aria-label="anchor" href="#acceptable-use-rules"></a>
+</h3>
+<ul>
+<li>Login Node Etiquette: No high-CPU, high-RAM, or multi-threaded jobs
+on login nodes. Rogue processes will be terminated automatically.</li>
+<li>Resource Request Accuracy: Request only the CPUs, GPUs, memory, and
+walltime your job actually needs. Over-requesting leads to longer queue
+wait times and starves other users.</li>
+<li>Fair-Share Priority: Prioritization is calculated algorithmically
+based on recent resource consumption.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="specific-cluster-policy-limits">3.2 Specific Cluster Policy Limits<a class="anchor" aria-label="anchor" href="#specific-cluster-policy-limits"></a>
+</h3>
+<ul>
+<li>GPU Allocation Cap: [INSERT: e.g., Maximum 8 GPUs per user across
+active jobs]</li>
+<li>Job Runtime Limits: [INSERT: e.g., Default queue max walltime 48
+hours]</li>
+<li>Account Security &amp; SSH: Shared accounts are strictly prohibited.
+Multi-factor authentication or SSH key access required.</li>
+<li>Data Cleanup Responsibilities: Users are required to purge /scratch
+space regularly.</li>
+</ul>
+</div>
+</section><section><h2 class="section-heading" id="section-4-submitting-managing-jobs-with-slurm-15-mins">Section 4: Submitting &amp; Managing Jobs with Slurm (15 mins)<a class="anchor" aria-label="anchor" href="#section-4-submitting-managing-jobs-with-slurm-15-mins"></a>
+</h2>
+<hr class="half-width">
+<div class="section level3">
+<h3 id="anatomy-of-a-slurm-batch-script-submit-sh">4.1 Anatomy of a Slurm Batch Script (submit.sh)<a class="anchor" aria-label="anchor" href="#anatomy-of-a-slurm-batch-script-submit-sh"></a>
+</h3>
+<div class="bash">
+<p>#!/bin/bash #SBATCH –job-name=hpc_demo #SBATCH
+–output=logs/job_%j.out #SBATCH –error=logs/job_%j.err #SBATCH –nodes=1
+#SBATCH –ntasks=1 #SBATCH –cpus-per-task=4 #SBATCH –mem=16G #SBATCH
+–time=01:00:00 #SBATCH –partition=[INSERT_PARTITION_NAME] #SBATCH
 –account=[INSERT_ACCOUNT_NAME]</p>
 <div class="section level1">
 <h1 id="load-required-environment-modules">1. Load required environment modules<a class="anchor" aria-label="anchor" href="#load-required-environment-modules"></a>
@@ -466,29 +696,36 @@ Anatomy of a Slurm Batch Script (submit.sh)
 <h1 id="execute-computational-workload">3. Execute computational workload<a class="anchor" aria-label="anchor" href="#execute-computational-workload"></a>
 </h1>
 <p>python3 my_script.py</p>
-<p>::::::::::::::::::::::::::::::::::::::::::::::::::</p>
-<p>4.2 Essential Slurm Commands</p>
-<p>Session 5: Wrap-Up, Troubleshooting &amp; Q&amp;A (10 mins) 5.1
-Common Troubleshooting Scenarios</p>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="ex">OUT_OF_MEMORY</span> <span class="er">(</span><span class="ex">OOM</span><span class="kw">)</span> <span class="ex">Errors:</span> Job exceeded requested RAM <span class="er">(</span><span class="ex">--mem</span><span class="kw">)</span><span class="bu">.</span> Increase memory limit in <span class="co">#SBATCH header.</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1" aria-label="code-block-7-3"></a><span class="ex">TIMEOUT</span> Errors: Job ran longer than requested <span class="at">--time.</span> Increase requested walltime or implement checkpointing.</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1" aria-label="code-block-7-4"></a></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1" aria-label="code-block-7-5"></a><span class="ex">Pending</span> Job Reason ReqNodeNotAvailable / QOSResourceLimit: Job requests exceed max policy limits or hardware availability.</span></code></pre>
 </div>
-<p>5.2 Support Channels &amp; Resources</p>
-<div class="codewrapper sourceCode" id="cb8">
-<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="ex">Cluster</span> Documentation: [INSERT: Link to wiki / docs]</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1" aria-label="code-block-8-2"></a></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1" aria-label="code-block-8-3"></a><span class="ex">Helpdesk</span> / Ticketing: [INSERT: Support email / ticket portal]</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1" aria-label="code-block-8-4"></a></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1" aria-label="code-block-8-5"></a><span class="ex">System</span> Status <span class="kw">&amp;</span> <span class="ex">Maintenance:</span> [INSERT: Status page URL]</span></code></pre>
 </div>
+</div>
+<div class="section level3">
+<h3 id="essential-slurm-commands">4.2 Essential Slurm Commands<a class="anchor" aria-label="anchor" href="#essential-slurm-commands"></a>
+</h3>
+</div>
+</section><section><h2 class="section-heading" id="section-5-wrap-up-troubleshooting-qa-10-mins">Section 5: Wrap-Up, Troubleshooting &amp; Q&amp;A (10 mins)<a class="anchor" aria-label="anchor" href="#section-5-wrap-up-troubleshooting-qa-10-mins"></a>
+</h2>
+<hr class="half-width">
+<div class="section level3">
+<h3 id="common-troubleshooting-scenarios">5.1 Common Troubleshooting Scenarios<a class="anchor" aria-label="anchor" href="#common-troubleshooting-scenarios"></a>
+</h3>
+<ul>
+<li>OUT_OF_MEMORY (OOM) Errors: Job exceeded requested RAM (–mem).
+Increase memory limit in #SBATCH header.</li>
+<li>TIMEOUT Errors: Job ran longer than requested –time. Increase
+requested walltime or implement checkpointing.</li>
+<li>Pending Job Reason ReqNodeNotAvailable / QOSResourceLimit: Job
+requests exceed max policy limits or hardware availability.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="support-channels-resources">5.2 Support Channels &amp; Resources<a class="anchor" aria-label="anchor" href="#support-channels-resources"></a>
+</h3>
+<ul>
+<li>Cluster Documentation: [INSERT: Link to wiki / docs]</li>
+<li>Helpdesk / Ticketing: [INSERT: Support email / ticket portal]</li>
+<li>System Status &amp; Maintenance: [INSERT: Status page URL]</li>
+</ul>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -509,7 +746,8 @@ resource requests.</li>
 </div>
 </div>
 </div>
-</div></section>
+</div>
+</section></section>
 </div>
     </main>
 </div>
@@ -559,8 +797,8 @@ resource requests.</li>
   "url": "https://swcarpentry.github.io/python-novice-inflammation/instructor/aio.html",
   "identifier": "https://swcarpentry.github.io/python-novice-inflammation/instructor/aio.html",
   "dateCreated": "2014-11-25",
-  "dateModified": "2026-10-07",
-  "datePublished": "2026-10-07"
+  "dateModified": "2026-10-09",
+  "datePublished": "2026-10-09"
 }
 
   </script><script>
