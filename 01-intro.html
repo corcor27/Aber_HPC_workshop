@@ -213,7 +213,6 @@
 <li><a href="#section-2-system-specs-environment-setup">Section 2: System Specs &amp; Environment Setup</a></li>
 <li><a href="#section-3-usage-policy-system-etiquette-10-mins">Section 3: Usage Policy &amp; System Etiquette (10 mins)</a></li>
 <li><a href="#section-4-submitting-managing-jobs-with-slurm-15-mins">Section 4: Submitting &amp; Managing Jobs with Slurm (15 mins)</a></li>
-<li><a href="#section-5-wrap-up-troubleshooting-qa-10-mins">Section 5: Wrap-Up, Troubleshooting &amp; Q&amp;A (10 mins)</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -461,14 +460,12 @@ total, configurable to 400W each)<br></li>
 </ul></div>
 <div class="section level3">
 <h3 id="hardware-specifications-overview">2.1 Hardware Specifications Overview<a class="anchor" aria-label="anchor" href="#hardware-specifications-overview"></a></h3>
-<ul><li>Compute Architecture: [INSERT: e.g., x86_64 / Rocky Linux /
-Ubuntu]</li>
+<ul><li>Compute Architecture: [Rocky Linux]</li>
 <li>Total Compute Nodes: [INSERT: Total node count]</li>
 <li>CPU Resources: [INSERT: e.g., AMD EPYC / Intel Xeon cores per
 node]</li>
-<li>GPU Accelerator Resources: [INSERT: e.g., NVIDIA A100 / H100 / L40S
-specs]</li>
-<li>Interconnect: [INSERT: e.g., InfiniBand 100Gbps / Ethernet]</li>
+<li>GPU Accelerator Resources: [NVIDIA A100 / H100]</li>
+<li>Interconnect: [Ethernet]</li>
 </ul></div>
 <div class="section level3">
 <h3 id="storage-tiers-quotas">2.2 Storage Tiers &amp; Quotas<a class="anchor" aria-label="anchor" href="#storage-tiers-quotas"></a></h3>
@@ -534,13 +531,13 @@ space regularly.</li>
 </section><section><h2 class="section-heading" id="section-4-submitting-managing-jobs-with-slurm-15-mins">Section 4: Submitting &amp; Managing Jobs with Slurm (15 mins)<a class="anchor" aria-label="anchor" href="#section-4-submitting-managing-jobs-with-slurm-15-mins"></a></h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="anatomy-of-a-slurm-batch-script-submit-sh">4.1 Anatomy of a Slurm Batch Script (submit.sh)<a class="anchor" aria-label="anchor" href="#anatomy-of-a-slurm-batch-script-submit-sh"></a></h3>
-<div class="bash">
-<p>#!/bin/bash #SBATCH –job-name=hpc_demo #SBATCH
+<p>’’’ #!/bin/bash #SBATCH –job-name=hpc_demo #SBATCH
 –output=logs/job_%j.out #SBATCH –error=logs/job_%j.err #SBATCH –nodes=1
 #SBATCH –ntasks=1 #SBATCH –cpus-per-task=4 #SBATCH –mem=16G #SBATCH
 –time=01:00:00 #SBATCH –partition=[INSERT_PARTITION_NAME] #SBATCH
 –account=[INSERT_ACCOUNT_NAME]</p>
-<div class="section level1">
+</div>
+</section><div class="section level1">
 <h1 id="load-required-environment-modules">1. Load required environment modules<a class="anchor" aria-label="anchor" href="#load-required-environment-modules"></a></h1>
 <p>module load python/3.11</p>
 </div>
@@ -550,15 +547,14 @@ space regularly.</li>
 </div>
 <div class="section level1">
 <h1 id="execute-computational-workload">3. Execute computational workload<a class="anchor" aria-label="anchor" href="#execute-computational-workload"></a></h1>
-<p>python3 my_script.py</p>
-</div>
-</div>
-</div>
+<p>python my_script.py</p>
+<p>’’’ {: .bash}</p>
 <div class="section level3">
 <h3 id="essential-slurm-commands">4.2 Essential Slurm Commands<a class="anchor" aria-label="anchor" href="#essential-slurm-commands"></a></h3>
 </div>
-</section><section><h2 class="section-heading" id="section-5-wrap-up-troubleshooting-qa-10-mins">Section 5: Wrap-Up, Troubleshooting &amp; Q&amp;A (10 mins)<a class="anchor" aria-label="anchor" href="#section-5-wrap-up-troubleshooting-qa-10-mins"></a></h2>
-<hr class="half-width"><div class="section level3">
+<div class="section level2">
+<h2 id="section-5-wrap-up-troubleshooting-qa-10-mins">Section 5: Wrap-Up, Troubleshooting &amp; Q&amp;A (10 mins)<a class="anchor" aria-label="anchor" href="#section-5-wrap-up-troubleshooting-qa-10-mins"></a></h2>
+<div class="section level3">
 <h3 id="common-troubleshooting-scenarios">5.1 Common Troubleshooting Scenarios<a class="anchor" aria-label="anchor" href="#common-troubleshooting-scenarios"></a></h3>
 <ul><li>OUT_OF_MEMORY (OOM) Errors: Job exceeded requested RAM (–mem).
 Increase memory limit in #SBATCH header.</li>
@@ -591,7 +587,12 @@ resource requests.</li>
 </div>
 </div>
 </div>
-</section></div> <!-- / div.lesson-content -->
+</div>
+</div>
+
+
+
+      </div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter Bottom"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="index.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
       </div>

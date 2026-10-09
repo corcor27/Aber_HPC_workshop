@@ -568,14 +568,12 @@ total, configurable to 400W each)<br>
 <h3 id="hardware-specifications-overview">2.1 Hardware Specifications Overview<a class="anchor" aria-label="anchor" href="#hardware-specifications-overview"></a>
 </h3>
 <ul>
-<li>Compute Architecture: [INSERT: e.g., x86_64 / Rocky Linux /
-Ubuntu]</li>
+<li>Compute Architecture: [Rocky Linux]</li>
 <li>Total Compute Nodes: [INSERT: Total node count]</li>
 <li>CPU Resources: [INSERT: e.g., AMD EPYC / Intel Xeon cores per
 node]</li>
-<li>GPU Accelerator Resources: [INSERT: e.g., NVIDIA A100 / H100 / L40S
-specs]</li>
-<li>Interconnect: [INSERT: e.g., InfiniBand 100Gbps / Ethernet]</li>
+<li>GPU Accelerator Resources: [NVIDIA A100 / H100]</li>
+<li>Interconnect: [Ethernet]</li>
 </ul>
 </div>
 <div class="section level3">
@@ -669,13 +667,13 @@ space regularly.</li>
 <div class="section level3">
 <h3 id="anatomy-of-a-slurm-batch-script-submit-sh">4.1 Anatomy of a Slurm Batch Script (submit.sh)<a class="anchor" aria-label="anchor" href="#anatomy-of-a-slurm-batch-script-submit-sh"></a>
 </h3>
-<div class="bash">
-<p>#!/bin/bash #SBATCH –job-name=hpc_demo #SBATCH
+<p>’’’ #!/bin/bash #SBATCH –job-name=hpc_demo #SBATCH
 –output=logs/job_%j.out #SBATCH –error=logs/job_%j.err #SBATCH –nodes=1
 #SBATCH –ntasks=1 #SBATCH –cpus-per-task=4 #SBATCH –mem=16G #SBATCH
 –time=01:00:00 #SBATCH –partition=[INSERT_PARTITION_NAME] #SBATCH
 –account=[INSERT_ACCOUNT_NAME]</p>
-<div class="section level1">
+</div>
+</section><div class="section level1">
 <h1 id="load-required-environment-modules">1. Load required environment modules<a class="anchor" aria-label="anchor" href="#load-required-environment-modules"></a>
 </h1>
 <p>module load python/3.11</p>
@@ -688,17 +686,15 @@ space regularly.</li>
 <div class="section level1">
 <h1 id="execute-computational-workload">3. Execute computational workload<a class="anchor" aria-label="anchor" href="#execute-computational-workload"></a>
 </h1>
-<p>python3 my_script.py</p>
-</div>
-</div>
-</div>
+<p>python my_script.py</p>
+<p>’’’ {: .bash}</p>
 <div class="section level3">
 <h3 id="essential-slurm-commands">4.2 Essential Slurm Commands<a class="anchor" aria-label="anchor" href="#essential-slurm-commands"></a>
 </h3>
 </div>
-</section><section><h2 class="section-heading" id="section-5-wrap-up-troubleshooting-qa-10-mins">Section 5: Wrap-Up, Troubleshooting &amp; Q&amp;A (10 mins)<a class="anchor" aria-label="anchor" href="#section-5-wrap-up-troubleshooting-qa-10-mins"></a>
+<div class="section level2">
+<h2 id="section-5-wrap-up-troubleshooting-qa-10-mins">Section 5: Wrap-Up, Troubleshooting &amp; Q&amp;A (10 mins)<a class="anchor" aria-label="anchor" href="#section-5-wrap-up-troubleshooting-qa-10-mins"></a>
 </h2>
-<hr class="half-width">
 <div class="section level3">
 <h3 id="common-troubleshooting-scenarios">5.1 Common Troubleshooting Scenarios<a class="anchor" aria-label="anchor" href="#common-troubleshooting-scenarios"></a>
 </h3>
@@ -740,7 +736,8 @@ resource requests.</li>
 </div>
 </div>
 </div>
-</section></section>
+</div>
+</div></section>
 </div>
     </main>
 </div>
