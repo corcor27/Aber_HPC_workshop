@@ -114,12 +114,12 @@ exercises: 0
 
 ### 2.1 Hardware Specifications Overview
 
-- Compute Architecture: [INSERT: e.g., x86_64 / Rocky Linux / Ubuntu]
+- Compute Architecture: [Rocky Linux]
 - Total Compute Nodes: [INSERT: Total node count]
 - CPU Resources: [INSERT: e.g., AMD EPYC / Intel Xeon cores per node]
-- GPU Accelerator Resources: [INSERT: e.g., NVIDIA A100 / H100 / L40S specs]
-- Interconnect: [INSERT: e.g., InfiniBand 100Gbps / Ethernet]
-    
+- GPU Accelerator Resources: [NVIDIA A100 / H100]
+- Interconnect: [Ethernet]
+
 ### 2.2 Storage Tiers & Quotas
 
 Here's a synopsis of filesystems on the cluster at Aberystwyth:
@@ -157,7 +157,7 @@ Here's a synopsis of filesystems on the cluster at Aberystwyth:
 
 ### 4.1 Anatomy of a Slurm Batch Script (submit.sh)
 
-:::::::::::::::::::::::::::::::::::::::: bash
+'''
 #!/bin/bash
 #SBATCH --job-name=hpc_demo
 #SBATCH --output=logs/job_%j.out
@@ -177,9 +177,10 @@ module load python/3.11
 echo "Job started on node: $(hostname) at $(date)"
 
 # 3. Execute computational workload
-python3 my_script.py
+python my_script.py
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+'''
+{: .bash}
 
 ### 4.2 Essential Slurm Commands
 
