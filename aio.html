@@ -667,34 +667,38 @@ space regularly.</li>
 <div class="section level3">
 <h3 id="anatomy-of-a-slurm-batch-script-submit-sh">4.1 Anatomy of a Slurm Batch Script (submit.sh)<a class="anchor" aria-label="anchor" href="#anatomy-of-a-slurm-batch-script-submit-sh"></a>
 </h3>
-<p>’’’bash #!/bin/bash #SBATCH –job-name=hpc_demo #SBATCH
-–output=logs/job_%j.out #SBATCH –error=logs/job_%j.err #SBATCH –nodes=1
-#SBATCH –ntasks=1 #SBATCH –cpus-per-task=4 #SBATCH –mem=16G #SBATCH
-–time=01:00:00 #SBATCH –partition=[INSERT_PARTITION_NAME] #SBATCH
-–account=[INSERT_ACCOUNT_NAME]</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="co">#SBATCH --job-name=hpc_demo</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="co">#SBATCH --output=logs/job_%j.out</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a><span class="co">#SBATCH --error=logs/job_%j.err</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a><span class="co">#SBATCH --ntasks=1</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1" aria-label="code-block-1-7"></a><span class="co">#SBATCH --cpus-per-task=4</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a><span class="co">#SBATCH --mem=16G</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a><span class="co">#SBATCH --partition=[INSERT_PARTITION_NAME]</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a><span class="co">#SBATCH --account=[INSERT_ACCOUNT_NAME]</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a><span class="co"># 1. Load required environment modules</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="ex">module</span> load python/3.11</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1" aria-label="code-block-1-16"></a><span class="co"># 2. Print execution metadata</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1" aria-label="code-block-1-17"></a><span class="bu">echo</span> <span class="st">"Job started on node: </span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span><span class="st"> at </span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1" aria-label="code-block-1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1" aria-label="code-block-1-19"></a><span class="co"># 3. Execute computational workload</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1" aria-label="code-block-1-20"></a><span class="ex">python</span> my_script.py</span></code></pre>
 </div>
-</section><div class="section level1">
-<h1 id="load-required-environment-modules">1. Load required environment modules<a class="anchor" aria-label="anchor" href="#load-required-environment-modules"></a>
-</h1>
-<p>module load python/3.11</p>
 </div>
-<div class="section level1">
-<h1 id="print-execution-metadata">2. Print execution metadata<a class="anchor" aria-label="anchor" href="#print-execution-metadata"></a>
-</h1>
-<p>echo “Job started on node: $(hostname) at $(date)”</p>
-</div>
-<div class="section level1">
-<h1 id="execute-computational-workload">3. Execute computational workload<a class="anchor" aria-label="anchor" href="#execute-computational-workload"></a>
-</h1>
-<p>python my_script.py</p>
-<p>’’’</p>
 <div class="section level3">
 <h3 id="essential-slurm-commands">4.2 Essential Slurm Commands<a class="anchor" aria-label="anchor" href="#essential-slurm-commands"></a>
 </h3>
 </div>
-<div class="section level2">
-<h2 id="section-5-wrap-up-troubleshooting-qa-10-mins">Section 5: Wrap-Up, Troubleshooting &amp; Q&amp;A (10 mins)<a class="anchor" aria-label="anchor" href="#section-5-wrap-up-troubleshooting-qa-10-mins"></a>
+</section><section><h2 class="section-heading" id="section-5-wrap-up-troubleshooting-qa-10-mins">Section 5: Wrap-Up, Troubleshooting &amp; Q&amp;A (10 mins)<a class="anchor" aria-label="anchor" href="#section-5-wrap-up-troubleshooting-qa-10-mins"></a>
 </h2>
+<hr class="half-width">
 <div class="section level3">
 <h3 id="common-troubleshooting-scenarios">5.1 Common Troubleshooting Scenarios<a class="anchor" aria-label="anchor" href="#common-troubleshooting-scenarios"></a>
 </h3>
@@ -736,8 +740,7 @@ resource requests.</li>
 </div>
 </div>
 </div>
-</div>
-</div></section>
+</section></section>
 </div>
     </main>
 </div>
