@@ -667,7 +667,7 @@ space regularly.</li>
 <div class="section level3">
 <h3 id="anatomy-of-a-slurm-batch-script-submit-sh">4.1 Anatomy of a Slurm Batch Script (submit.sh)<a class="anchor" aria-label="anchor" href="#anatomy-of-a-slurm-batch-script-submit-sh"></a>
 </h3>
-<p>’’’ #!/bin/bash #SBATCH –job-name=hpc_demo #SBATCH
+<p>’’’bash #!/bin/bash #SBATCH –job-name=hpc_demo #SBATCH
 –output=logs/job_%j.out #SBATCH –error=logs/job_%j.err #SBATCH –nodes=1
 #SBATCH –ntasks=1 #SBATCH –cpus-per-task=4 #SBATCH –mem=16G #SBATCH
 –time=01:00:00 #SBATCH –partition=[INSERT_PARTITION_NAME] #SBATCH
@@ -687,7 +687,7 @@ space regularly.</li>
 <h1 id="execute-computational-workload">3. Execute computational workload<a class="anchor" aria-label="anchor" href="#execute-computational-workload"></a>
 </h1>
 <p>python my_script.py</p>
-<p>’’’ {: .bash}</p>
+<p>’’’</p>
 <div class="section level3">
 <h3 id="essential-slurm-commands">4.2 Essential Slurm Commands<a class="anchor" aria-label="anchor" href="#essential-slurm-commands"></a>
 </h3>
